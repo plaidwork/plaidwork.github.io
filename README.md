@@ -1,9 +1,9 @@
 # 搜喵导航轻量版
 [搜喵导航](https://plaidwork.github.io)
 
-![](https://plaidwork.github.io/static/192.png)搜索喵，简单无广告。
+![](https://s.plaidweb.top/static/192.png)搜索喵，简单无广告。
 
-☕[展示地址](https://s.plaidweb.top "搜喵导航")丨🤞
+☕[展示地址](https://s.plaidweb.top "搜喵导航")丨🤞 https://s.plaidweb.top
 
 ## 当前版本：v1.0.0 2022.07.23
 ### Fork or Ctrl + C/V ？
