@@ -1,7 +1,7 @@
 # 搜喵导航轻量版
 [搜喵导航](https://plaidwork.github.io)
 
-![](https://s.plaidweb.top/static/192.png)搜索喵，简单无广告。
+![](https://s.plaidweb.top/static/icon/192.png)搜索喵，简单无广告。
 
 ☕[展示地址](https://s.plaidweb.top "搜喵导航")丨🤞 https://s.plaidweb.top
 
