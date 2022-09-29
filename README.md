@@ -3,7 +3,7 @@
 
 ![](https://s.plaidweb.top/static/icon/32.png)搜索喵，简单无广告。
 
-☕[展示地址1](https://s.plaidweb.top "搜喵导航")丨🤞 https://s.plaidweb.top
+☕[展示地址1](https://soumiao.top "搜喵导航")丨🤞 https://soumiao.top
 
 🎈[展示地址2](https://catnav.vercel.app "搜喵导航")丨🤞 https://catnav.vercel.app
 
