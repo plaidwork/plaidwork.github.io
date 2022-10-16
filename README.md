@@ -6,6 +6,7 @@
 ☕[展示地址1](https://soumiao.top "搜喵导航")丨🤞 https://soumiao.top
 
 🎈[展示地址2](https://catnav.vercel.app "搜喵导航")丨🤞 https://catnav.vercel.app
+🍭[展示地址3](https://soumiao.netlify.app "搜喵导航")丨🤞 https://soumiao.netlify.app
 
 ## 当前版本：v1.0.0 2022.07.23
 ### Fork or Ctrl + C/V ？
