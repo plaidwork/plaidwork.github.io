@@ -198,13 +198,14 @@
                 ]
                 const currentEngine = ref(engines[0])
 
-                // 完整链接数据
+                // 完整链接数据 (已根据 link.txt 更新)
                 const links = [
                     {
                         "category": "热门推荐", "iconClass": "fa fa-fire",
                         "items": [
                             { "name": "DeepL翻译", "url": "https://www.deepl.com/translator", "icon": "fa-solid fa-language", "color": "#1B1E25" },
                             { "name": "QQ邮箱", "url": "https://mail.qq.com", "icon": "fa-solid fa-envelope", "color": "#FABD0A" },
+                            { "name": "打字练习", "url": "https://dazidazi.com", "icon": "fa-solid fa-d", "color": "#1B1E25" },
                             { "name": "微信开发", "url": "https://mp.weixin.qq.com", "icon": "fa-brands fa-weixin", "color": "#2AAE67" },
                             { "name": "百度网盘", "url": "https://pan.baidu.com", "icon": "fa-solid fa-cloud-arrow-down", "color": "#0EAEFF" },
                             { "name": "阿里云盘", "url": "https://www.aliyundrive.com", "icon": "fa-solid fa-cloud-arrow-down", "color": "#446DFF" },
@@ -214,7 +215,18 @@
                             { "name": "新浪邮箱", "url": "https://mail.sina.com.cn", "icon": "fa-brands fa-weibo", "color": "#DE252A" },
                             { "name": "钉钉办公", "url": "https://www.dingtalk.com", "icon": "fa-solid fa-d", "color": "#0089FF" },
                             { "name": "企业微信", "url": "https://work.weixin.qq.com", "icon": "fa-brands fa-weixin", "color": "#FC6500" },
-                            { "name": "阿里邮箱", "url": "https://mail.aliyun.com", "icon": "fa-solid fa-m", "color": "#EF4542" }
+                            { "name": "阿里邮箱", "url": "https://mail.aliyun.com", "icon": "fa-solid fa-m", "color": "#EF4542" },
+                            { "name": "ChatGPT", "url": "https://chat.openai.com/chat", "icon": "fa-solid fa-comments", "color": "#75A99C" },
+                            { "name": "文心一言", "url": "https://yiyan.baidu.com/welcome", "icon": "fa-solid fa-comments", "color": "#0773ff" },
+                            { "name": "腾讯元宝", "url": "https://yuanbao.tencent.com", "icon": "fa-solid fa-earth-americas", "color": "#5EC77A" },
+                            { "name": "讯飞星火", "url": "https://xinghuo.xfyun.cn", "icon": "fa-solid fa-fire", "color": "#6b89ff" },
+                            { "name": "通义千问", "url": "https://tongyi.aliyun.com", "icon": "fa-solid fa-comments", "color": "#2c2c73" },
+                            { "name": "通义听悟", "url": "https://tingwu.aliyun.com/home", "icon": "fa-solid fa-dove", "color": "#605ce5" },
+                            { "name": "豆包", "url": "https://www.doubao.com", "icon": "fa-regular fa-face-meh-blank", "color": "#CAE4FF" },
+                            { "name": "即时AI", "url": "https://js.design/ai", "icon": "fa-solid fa-circle-nodes", "color": "#000" },
+                            { "name": "Gemini", "url": "https://gemini.google.com", "icon": "fa-solid fa-wand-magic-sparkles", "color": "#4285F4" },
+                            { "name": "next AIGC", "url": "https://www.learnprompt.pro", "icon": "fa-solid fa-book", "color": "#2E8555" },
+                            { "name": "提示工程", "url": "https://www.promptingguide.ai/zh", "icon": "fa-brands fa-github-alt", "color": "#000" }
                         ]
                     },
                     {
@@ -243,6 +255,7 @@
                             { "name": "淘宝", "url": "https://www.taobao.com", "icon": "fa-brands fa-alipay", "color": "#FF5B00" },
                             { "name": "京东", "url": "https://www.jd.com", "icon": "fa-solid fa-d", "color": "#e1251b" },
                             { "name": "当当", "url": "https://www.dangdang.com", "icon": "fa-solid fa-bag-shopping", "color": "#FF2832" },
+                            { "name": "拼多多", "url": "https://www.pinduoduo.com", "icon": "fa-solid fa-p", "color": "#E22A1F" },
                             { "name": "网易严选", "url": "https://you.163.com", "icon": "fa-solid fa-cart-shopping", "color": "#333333" },
                             { "name": "苏宁易购", "url": "https://www.suning.com", "icon": "fa-solid fa-shop", "color": "#FFD000" },
                             { "name": "亚马逊", "url": "https://www.amazon.cn", "icon": "fa-brands fa-amazon", "color": "#FFA000" },
@@ -296,8 +309,6 @@
                             { "name": "合天网安", "url": "https://www.hetianlab.com", "icon": "fa-solid fa-shield-cat", "color": "#0086DC" },
                             { "name": "QAdoc", "url": "https://qadoc.cn", "icon": "fa-solid fa-laptop-file", "color": "#212529" },
                             { "name": "风变编程", "url": "https://www.pypypy.cn", "icon": "fa-solid fa-wind", "color": "#050505" },
-                            { "name": "柠檬班", "url": "http://www.lemonban.com", "icon": "fa-solid fa-lemon", "color": "#FFDE6A" },
-                            { "name": "黑马程序员", "url": "https://www.itheima.com", "icon": "fa-solid fa-chess-knight", "color": "#495150" },
                             { "name": "软仓", "url": "https://www.ruancang.net", "icon": "fa-solid fa-warehouse", "color": "#8B9FC5" }
                         ]
                     },
@@ -326,7 +337,8 @@
                             { "name": "贝赛尔曲线", "url": "https://cubic-bezier.com", "icon": "fa-solid fa-bezier-curve", "color": "#00AABB" },
                             { "name": "图像优化", "url": "https://zh.recompressor.com", "icon": "fa-solid fa-file-image", "color": "#0000FF" },
                             { "name": "SVG压缩", "url": "http://tool.mkblog.cn/svgo", "icon": "fa-solid fa-file-image", "color": "#8A8A8A" },
-                            { "name": "时光Boot", "url": "https://flowus.cn/boot/share/4feb1624-943e-487d-8b69-4301c7ab61f3", "icon": "fa-brands fa-windows", "color": "#4ACBEA" }
+                            { "name": "时光Boot", "url": "https://flowus.cn/boot/share/4feb1624-943e-487d-8b69-4301c7ab61f3", "icon": "fa-brands fa-windows", "color": "#4ACBEA" },
+                            { "name": "GitHub加速", "url": "https://ghproxy.com/", "icon": "fa-brands fa-github", "color": "#777777" }
                         ]
                     },
                     {
@@ -346,7 +358,7 @@
                             { "name": "网道文档", "url": "https://wangdoc.com", "icon": "fa-solid fa-file-lines", "color": "#089BE0" },
                             { "name": "提交收录", "url": "http://support.qq.com/product/64799", "icon": "fas fa-arrow-alt-circle-up", "color": "#FF1744" },
                             { "name": "浏览器检测", "url": "https://www.ghxi.com/llq", "icon": "fa-brands fa-chrome", "color": "#FBBC05" },
-                            { "name": "MDMKS", "url": "https://danmaku.suki.club", "icon": "fa-solid fa-code", "color": "#FF1744" }
+                            { "name": "VupLive", "url": "https://vup.darkflame.ga/online", "icon": "fa-solid fa-code", "color": "#FF1744" }
                         ]
                     }
                 ]
@@ -421,3 +433,4 @@
     </div>
 </body>
 </html>
+
