@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-accent="gold">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>喵喵起始页 - 你的上网主页</title>
+<meta name="description" content="喵喵起始页 - 高效简洁的上网主页，聚合常用网站，一键直达">
+<meta name="color-scheme" content="dark light">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" id="themeColor" content="#0e0c0a">
+<meta property="og:title" content="喵喵起始页 - 你的上网主页">
+<meta property="og:description" content="一个无广告且简洁快速的自适应的高效简洁的上网主页，聚合常用网站，一键直达">
+<meta name="keywords" content="轻导航,喵导航,nav,tool,search,navigation,soumiao,搜喵,喵喵起始页,在线工具,找灵感,办公工具,设计素材,喵喵轻量版">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+<link rel="canonical" href="https://icat.top/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://icons.duckduckgo.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════ 1. VARIABLES ═══════ */
+:root{--sidebar-w:216px;--radius:10px;--ease:cubic-bezier(.4,0,.2,1);--t:.2s}
+
+[data-accent="gold"]  {--a:#c9a04e;--a-h:#d4b060;--a-rgb:201,160,78}
+[data-accent="blue"]  {--a:#5b9ef4;--a-h:#6daef8;--a-rgb:91,158,244}
+[data-accent="green"] {--a:#4ade80;--a-h:#5ee890;--a-rgb:74,222,128}
+[data-accent="rose"]  {--a:#f472b6;--a-h:#f688c4;--a-rgb:244,114,182}
+[data-accent="violet"]{--a:#a78bfa;--a-h:#b49bfb;--a-rgb:167,139,250}
+[data-accent="teal"]  {--a:#2dd4bf;--a-h:#40e0d0;--a-rgb:45,212,191}
+[data-accent="orange"]{--a:#fb923c;--a-h:#fca555;--a-rgb:251,146,60}
+[data-accent="sky"]   {--a:#38bdf8;--a-h:#55c8fa;--a-rgb:56,189,248}
+
+[data-theme="dark"]{
+  --bg:#0e0c0a;--bg2:#16140f;--card:#1c1a14;--card-h:#2c2820;
+  --bd:#2e2b22;--bd-h:#554e3a;--tx:#e8e2d6;--tx2:#a89e8e;
+  --tx3:#8a8278;--ico-bg:#2a2720;--hero-glow:rgba(var(--a-rgb),.07)
+}
+[data-theme="light"]{
+  --bg:#f5f0e6;--bg2:#ece7db;--card:#fff;--card-h:#f0ece0;
+  --bd:#ddd6c6;--bd-h:#b8ae9a;--tx:#2a2520;--tx2:#6a6050;
+  --tx3:#706860;--ico-bg:#e8e2d4;--hero-glow:rgba(var(--a-rgb),.06)
+}
+
+/* ═══════ 2. RESET ═══════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto;scrollbar-gutter:stable}
+body{font-family:'Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background var(--t) var(--ease),color var(--t) var(--ease)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+::selection{background:var(--a);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+
+.skip-link{position:absolute;top:-100%;left:16px;padding:8px 16px;background:var(--a);color:#fff;border-radius:0 0 8px 8px;z-index:9999;font-size:13px;transition:top .2s}
+.skip-link:focus{top:0}
+:focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:4px}
+
+/* ═══════ 3. LAYOUT ═══════ */
+.app{display:flex;min-height:100vh}
+
+/* ═══════ 4. SIDEBAR ═══════ */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:var(--bg2);border-right:1px solid var(--bd);display:flex;flex-direction:column;z-index:100;overflow-y:auto;overflow-x:hidden;transition:background var(--t),border-color var(--t)}
+.sb-brand{padding:28px 22px 18px;border-bottom:1px solid var(--bd);flex-shrink:0}
+.sb-brand .brand-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--a);transition:color var(--t)}
+.sb-brand p{font-size:10.5px;color:var(--tx3);margin-top:2px;letter-spacing:.08em;transition:color var(--t)}
+.sb-nav{padding:12px 8px;flex:1}
+.sb-nav a{display:flex;align-items:center;gap:9px;padding:8px 14px;border-radius:8px;font-size:13px;color:var(--tx2);transition:background var(--t),color var(--t);margin-bottom:1px;position:relative}
+@media(hover:hover){.sb-nav a:hover{background:rgba(var(--a-rgb),.08);color:var(--tx)}}
+.sb-nav a.on{background:rgba(var(--a-rgb),.1);color:var(--a);font-weight:500}
+.sb-nav a.on::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:16px;background:var(--a);border-radius:0 3px 3px 0}
+.sb-ic{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.sb-ct{margin-left:auto;font-size:10.5px;color:var(--tx3);opacity:.7;transition:color var(--t)}
+
+/* ═══════ 5. MAIN ═══════ */
+.main{flex:1;margin-left:var(--sidebar-w);min-width:0}
+
+/* ═══════ 6. HERO ═══════ */
+.hero{position:relative;padding:50px 48px 30px;border-bottom:1px solid var(--bd);overflow:hidden;transition:border-color var(--t)}
+.hero::before{content:'';position:absolute;top:-120px;left:20%;width:560px;height:420px;background:radial-gradient(ellipse,var(--hero-glow),transparent 70%);pointer-events:none;transition:background var(--t)}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,650px) minmax(280px,560px);align-items:stretch;justify-content:start;gap:clamp(12px,1.1vw,18px)}
+.hero-inner.no-media{grid-template-columns:minmax(0,650px)}
+.hero-copy{min-width:0}
+.hero-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.hero-time{font-family:'Syne',monospace;font-size:11.5px;color:var(--tx3);letter-spacing:.06em;transition:color var(--t)}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;letter-spacing:-.03em;margin-bottom:3px}
+.hero h1 em{font-style:normal;color:var(--a);transition:color var(--t)}
+.hero-sub{font-size:14px;color:var(--tx2);margin-bottom:22px;transition:color var(--t)}
+.hero-help{display:flex;align-items:flex-start;gap:8px;margin-top:12px;max-width:600px;padding:8px 10px;border:1px solid rgba(var(--a-rgb),.12);border-radius:9px;background:rgba(var(--a-rgb),.025);color:var(--tx3);font-size:11px;line-height:1.65}
+.hero-help svg{width:14px;height:14px;flex:0 0 14px;margin-top:2px;color:var(--a)}
+.hero-help button{border:0;background:none;color:var(--a);font:600 11px/1.65 inherit;padding:0;cursor:pointer;white-space:nowrap}
+.hero-help button:hover{text-decoration:underline}
+.hero-media{justify-self:stretch;align-self:stretch;width:100%;min-width:0;display:flex;align-items:center;justify-content:flex-start}
+.hero-media[hidden]{display:none}
+.hero-media-frame{position:relative;width:100%;max-width:560px;aspect-ratio:16/9;max-height:320px;overflow:hidden;border-radius:16px;border:1px solid var(--bd);background:var(--card);box-shadow:0 12px 32px rgba(0,0,0,.16)}
+.hero-media-frame.bare{border:0;border-radius:0;box-shadow:none}
+.hero-media.max-ratio{align-items:stretch}
+.hero-media.max-ratio .hero-media-frame{height:100%;min-height:220px;max-height:320px;aspect-ratio:auto}
+.hero-media-frame img{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease,transform .45s var(--ease)}
+.hero-media-frame.loaded img{opacity:1}
+@media(hover:hover){.hero-media-frame.loaded:hover img{transform:scale(1.018)}}
+.hero-media-badge{position:absolute;right:9px;bottom:9px;z-index:3;padding:3px 7px;border-radius:999px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.86);font-size:9.5px;line-height:1.3;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hero-media-error{position:absolute;inset:0;display:none;place-items:center;padding:20px;text-align:center;color:var(--tx3);font-size:11px;line-height:1.6}
+.hero-media-frame.error .hero-media-error{display:grid}
+.hero-media-frame.loading::after,.card-icon.loading::after,.skel-block::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(var(--a-rgb),.09) 42%,rgba(var(--a-rgb),.14) 50%,transparent 72%);transform:translateX(-100%);animation:skeletonShimmer 1.25s ease-in-out infinite}
+@keyframes skeletonShimmer{to{transform:translateX(100%)}}
+
+/* ═══════ 7. SEARCH ═══════ */
+.search-area{max-width:580px}
+.search-box{position:relative;display:flex;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:12px;transition:border-color .15s}
+.search-box:focus-within{border-color:var(--a);outline:3px solid rgba(var(--a-rgb),.12);outline-offset:-3px}
+.search-box svg{margin-left:15px;flex-shrink:0;color:var(--tx3);transition:color var(--t)}
+.search-input{flex:1;padding:13px 12px;background:none;border:none;color:var(--tx);font-size:15px;outline:none}
+.search-input::placeholder{color:var(--tx3)}
+.search-kbd{margin-right:8px;padding:2px 8px;border-radius:5px;font-size:10.5px;color:var(--tx3);background:var(--bg2);border:1px solid var(--bd);font-family:'Syne',monospace;flex-shrink:0}
+.search-clear{margin-right:8px;background:none;border:none;color:var(--tx3);font-size:18px;line-height:1;padding:2px 4px;display:none;flex-shrink:0}
+.search-clear.show{display:block}
+.search-clear:hover{color:var(--tx)}
+
+.search-hint{font-size:12px;color:var(--tx3);margin-top:8px;line-height:1.7;padding-left:2px}
+.search-hint em{font-style:normal;color:var(--a)}
+.search-hint span{color:var(--a);font-weight:500}
+@media(hover:none){.search-kbd,.search-hint .kh{display:none}}
+
+.engines{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.eng-label{font-size:11.5px;color:var(--tx3);margin-right:2px;flex-shrink:0}
+.eng-btn{padding:4px 13px;border-radius:18px;font-size:12px;color:var(--tx2);border:1px solid var(--bd);background:transparent;transition:border-color var(--t),color var(--t),background var(--t);white-space:nowrap}
+.eng-btn:hover{border-color:var(--bd-h);color:var(--tx)}
+.eng-btn.on{background:var(--a);color:#fff;border-color:var(--a);font-weight:500}
+
+.search-count{font-size:11.5px;color:var(--tx3);margin-top:5px;padding-left:2px;display:none}
+.search-count.show{display:block}
+.search-empty-hint{display:none;margin-top:6px;font-size:12px;color:var(--tx3);padding-left:2px}
+.search-empty-hint.show{display:block}
+.search-empty-hint kbd{padding:1px 6px;border:1px solid var(--bd);border-radius:4px;font-size:10.5px;background:var(--bg2);font-family:'Syne',monospace}
+.search-empty-hint span{color:var(--a);font-weight:500}
+
+/* ═══════ 8. SETTINGS ═══════ */
+.settings-trigger,.backup-trigger{position:fixed;top:18px;z-index:150;width:38px;height:38px;border-radius:50%;background:rgba(var(--a-rgb),.065);border:1px solid rgba(var(--a-rgb),.14);color:var(--a);display:flex;align-items:center;justify-content:center;box-shadow:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background var(--t),color var(--t),border-color var(--t),transform var(--t)}
+.settings-trigger{right:18px}
+.backup-trigger{right:64px}
+.settings-trigger:hover,.backup-trigger:hover{background:rgba(var(--a-rgb),.16);color:var(--a);border-color:rgba(var(--a-rgb),.32)}
+.settings-trigger:hover{transform:rotate(45deg)}
+.backup-trigger:hover{transform:translateY(-1px)}
+.settings-trigger svg,.backup-trigger svg{width:17px;height:17px}
+
+.sp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.sp-overlay.open{opacity:1;pointer-events:all}
+body.dialog-open{overflow:hidden}
+/* ★ 改进：设置面板增加 max-width 防止窄屏溢出 */
+.sp-panel{position:fixed;top:0;right:-380px;width:340px;max-width:calc(100vw - 20px);height:100vh;background:var(--bg2);border-left:1px solid var(--bd);z-index:201;padding:30px 22px;overflow-y:auto;transition:right .35s var(--ease),background var(--t)}
+.sp-panel.open{right:0}
+.sp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.sp-head h2{font-family:'Syne',sans-serif;font-weight:700;font-size:17px}
+.sp-x{width:30px;height:30px;border-radius:50%;background:var(--card);border:1px solid var(--bd);color:var(--tx2);display:flex;align-items:center;justify-content:center;font-size:17px;transition:background var(--t),color var(--t),border-color var(--t)}
+.sp-x:hover{background:var(--a);color:#fff;border-color:var(--a)}
+.sp-sec{margin-bottom:26px}
+.sp-lbl{font-size:12.5px;color:var(--tx3);margin-bottom:9px;letter-spacing:.02em}
+.sp-toggles{display:flex;gap:8px}
+/* ★ 改进：设置选项按钮文字过长时自动换行 */
+.sp-opt{flex:1;padding:9px;border-radius:var(--radius);text-align:center;font-size:12.5px;color:var(--tx2);border:1px solid var(--bd);background:var(--card);transition:border-color var(--t),color var(--t),background var(--t);line-height:1.4}
+.sp-opt:hover{border-color:var(--bd-h)}
+.sp-opt.on{border-color:var(--a);color:var(--a);background:rgba(var(--a-rgb),.08);font-weight:500}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:32px;height:32px;padding:0;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:transform var(--t),border-color var(--t)}
+.swatch:hover{transform:scale(1.15)}
+.swatch.on{border-color:var(--tx);transform:scale(1.15)}
+.swatch.on::after{content:'✓';display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:13px;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.swatch[data-c="gold"]{background:#c9a04e}.swatch[data-c="blue"]{background:#5b9ef4}.swatch[data-c="green"]{background:#4ade80}.swatch[data-c="rose"]{background:#f472b6}.swatch[data-c="violet"]{background:#a78bfa}.swatch[data-c="teal"]{background:#2dd4bf}.swatch[data-c="orange"]{background:#fb923c}.swatch[data-c="sky"]{background:#38bdf8}
+
+.sp-help{margin-top:8px;color:var(--tx3);font-size:10.5px;line-height:1.65}
+.sp-action{width:100%;margin-top:9px;padding:9px 11px;border:1px solid var(--bd);border-radius:9px;background:var(--card);color:var(--tx2);font:500 12px/1.4 inherit;text-align:center;transition:background var(--t),border-color var(--t),color var(--t)}
+.sp-action:hover{border-color:rgba(var(--a-rgb),.35);background:rgba(var(--a-rgb),.06);color:var(--a)}
+.sp-field{display:block;margin-top:9px}
+.sp-field span{display:block;margin-bottom:5px;color:var(--tx3);font-size:10.5px}
+.sp-input,.sp-select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:12px/1.4 inherit;outline:none}
+.sp-input:focus,.sp-select:focus{border-color:var(--a);box-shadow:0 0 0 2px rgba(var(--a-rgb),.08)}
+.sp-inline{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sp-file-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+.sp-file-name{min-width:0;flex:1;color:var(--tx3);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-ratios{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:8px}
+.sp-mini{padding:6px 4px;border:1px solid var(--bd);border-radius:7px;background:var(--card);color:var(--tx3);font:10.5px/1.2 inherit}
+.sp-mini.on{border-color:var(--a);color:var(--a);background:rgba(var(--a-rgb),.07)}
+.sp-switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:rgba(var(--a-rgb),.02)}
+.sp-switch-copy{min-width:0}.sp-switch-copy b{display:block;font-size:11.5px;font-weight:500;color:var(--tx2)}.sp-switch-copy span{display:block;margin-top:2px;font-size:9.5px;line-height:1.45;color:var(--tx3)}
+.sp-switch{position:relative;width:38px;height:22px;flex:0 0 38px;padding:0;border:1px solid var(--bd);border-radius:999px;background:var(--card);transition:background var(--t),border-color var(--t)}
+.sp-switch::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--tx3);transition:transform var(--t) var(--ease),background var(--t)}
+.sp-switch.on{background:rgba(var(--a-rgb),.16);border-color:rgba(var(--a-rgb),.35)}
+.sp-switch.on::after{transform:translateX(16px);background:var(--a)}
+
+/* ═══════ 9. MOBILE TABS ═══════ */
+.m-tabs{display:none;position:sticky;top:0;z-index:90;background:var(--bg);border-bottom:1px solid var(--bd);padding:0 16px;overflow-x:auto;scrollbar-width:none;transition:background var(--t),border-color var(--t)}
+.m-tabs::-webkit-scrollbar{display:none}
+.m-tabs::before,.m-tabs::after{content:'';position:absolute;top:0;bottom:0;width:40px;pointer-events:none;z-index:1;transition:opacity .25s}
+.m-tabs::before{left:0;background:linear-gradient(to right,var(--bg),transparent);opacity:0}
+.m-tabs::after{right:0;background:linear-gradient(to left,var(--bg),transparent);opacity:1}
+.m-tabs.at-end::after{opacity:0}
+.m-tabs.at-start::before{opacity:0}
+.m-tabs-in{display:flex;gap:4px;padding:10px 0;width:max-content}
+.m-tabs a{padding:10px 14px;border-radius:20px;font-size:12px;color:var(--tx2);white-space:nowrap;transition:background var(--t),color var(--t);flex-shrink:0;min-height:44px;display:flex;align-items:center;-webkit-tap-highlight-color:transparent}
+@media(hover:hover){.m-tabs a:hover{background:rgba(var(--a-rgb),.08)}}
+.m-tabs a.on{background:var(--a);color:#fff;font-weight:500}
+.sb-nav a.search-hidden,.m-tabs a.search-hidden{display:none}
+
+/* ═══════ 10. CONTENT ═══════ */
+.content{padding:8px 48px 80px}
+.page-skeleton{padding-top:26px;display:grid;gap:30px}
+.skel-section{display:grid;gap:14px}.skel-head{position:relative;width:170px;height:22px;border-radius:7px;background:var(--card);overflow:hidden}
+.skel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.skel-card{position:relative;height:46px;border:1px solid var(--bd);border-radius:var(--radius);background:var(--card);overflow:hidden}
+.skel-block{position:relative;overflow:hidden}
+.empty-nav{max-width:620px;margin:56px auto;padding:28px;border:1px dashed var(--bd);border-radius:16px;text-align:center;background:rgba(var(--a-rgb),.02)}
+.empty-nav b{display:block;font-size:16px;margin-bottom:6px}.empty-nav p{font-size:12px;color:var(--tx3);line-height:1.7;margin-bottom:14px}
+.empty-nav button{padding:8px 14px;border:1px solid rgba(var(--a-rgb),.25);border-radius:9px;background:rgba(var(--a-rgb),.07);color:var(--a);font:600 12px/1.4 inherit}
+.cat-sec{padding-top:38px;scroll-margin-top:18px}
+.cat-sec:first-child{padding-top:26px}
+.cat-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.cat-icon{font-size:17px}
+/* ★ 改进：分类标题使用 h2，与页面主标题 h1 形成正确层级 */
+.cat-name{font-weight:700;font-size:18px;letter-spacing:-.01em;margin:0}
+.cat-line{flex:1;height:1px;background:var(--bd);margin-left:8px}
+.cat-ct{font-size:10.5px;color:var(--tx3);background:var(--card);padding:2px 9px;border-radius:10px;border:1px solid var(--bd)}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+
+.site-card{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:var(--card);border:1px solid var(--bd);
+  border-radius:var(--radius);cursor:pointer;position:relative;
+  overflow:hidden;opacity:0;animation:cardIn .4s ease forwards;
+  min-height:44px;
+  contain:layout style;
+  content-visibility:auto;contain-intrinsic-size:auto 48px;
+  transition:background var(--t) var(--ease),border-color var(--t) var(--ease),box-shadow var(--t) var(--ease),transform var(--t) var(--ease);
+  -webkit-tap-highlight-color:rgba(var(--a-rgb),.15);
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+@media(hover:hover){
+  .site-card:hover{
+    background:var(--card-h);
+    border-color:var(--bd-h);
+    box-shadow:0 0 0 1px rgba(var(--a-rgb),.12),0 2px 8px rgba(0,0,0,.25),0 0 20px rgba(var(--a-rgb),.06);
+    transform:translateY(-1px);
+    will-change:transform;
+  }
+}
+.site-card:active{transform:scale(.97);box-shadow:none}
+.site-card.hide{display:none}
+
+.card-icon{position:relative;width:26px;height:26px;flex-shrink:0;border-radius:6px;overflow:hidden;background:var(--ico-bg);display:flex;align-items:center;justify-content:center}
+.card-icon .emoji{font-size:14px;line-height:1;z-index:1;transition:opacity .3s ease}
+.card-icon .favicon{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;opacity:0;transition:opacity .35s ease;padding:3px}
+.card-icon .favicon.ok{opacity:1}
+.card-icon .favicon.ok ~ .emoji{opacity:0}
+.card-icon.loading{isolation:isolate}
+.card-icon.loading::after{z-index:3;border-radius:inherit}
+
+.card-name{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════ 11. FOOTER ═══════ */
+.site-footer{margin:0 48px;padding:28px 0 32px;border-top:1px solid var(--bd)}
+.footer-row{display:flex;flex-wrap:wrap;gap:6px 0;margin-bottom:8px;align-items:center}
+.footer-row a,.footer-version{font:inherit;font-size:12px;color:var(--tx3);padding:0 8px;border:0;background:none;line-height:1.6}
+.footer-row > :first-child{padding-left:0}
+.footer-row a:hover,.footer-version:hover{color:var(--a)}
+.footer-version{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.footer-version strong{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--a);letter-spacing:.02em}
+.footer-version:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+.footer-row .sep{color:var(--bd);font-size:12px;user-select:none}
+.footer-copy{font-size:11px;color:var(--tx3);opacity:.55}
+
+/* ═══════ 12. VERSION MODAL ═══════ */
+.ver-overlay{position:fixed;inset:0;z-index:310;background:rgba(0,0,0,.58);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.ver-overlay.open{opacity:1;pointer-events:auto}
+.ver-modal{position:relative;width:min(600px,100%);max-height:min(760px,calc(100vh - 44px));overflow:auto;background:var(--bg2);border:1px solid var(--bd);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.38);transform:translateY(14px) scale(.985);transition:transform .26s var(--ease),background var(--t),border-color var(--t)}
+.ver-overlay.open .ver-modal{transform:translateY(0) scale(1)}
+.ver-hero{position:relative;padding:28px 28px 22px;overflow:hidden;border-bottom:1px solid var(--bd);background:linear-gradient(135deg,rgba(var(--a-rgb),.12),transparent 58%)}
+.ver-hero::after{content:'';position:absolute;width:220px;height:220px;right:-80px;top:-110px;border-radius:50%;background:radial-gradient(circle,rgba(var(--a-rgb),.2),transparent 68%);pointer-events:none}
+.ver-top{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1}
+.ver-brand{display:flex;align-items:center;gap:12px;min-width:0}
+.ver-mark{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(var(--a-rgb),.13);border:1px solid rgba(var(--a-rgb),.22);font-size:20px}
+.ver-kicker{font-size:11px;color:var(--tx3);letter-spacing:.12em;text-transform:uppercase}
+.ver-title{display:flex;align-items:baseline;gap:9px;margin-top:2px}
+.ver-title h2{font-family:'Syne',sans-serif;font-size:23px;line-height:1.1;letter-spacing:-.02em}
+.ver-badge{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--a);padding:3px 8px;border-radius:999px;background:rgba(var(--a-rgb),.1);border:1px solid rgba(var(--a-rgb),.22)}
+.ver-close{position:relative;z-index:2;width:32px;height:32px;flex:0 0 32px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--bd);background:rgba(var(--a-rgb),.035);color:var(--tx2);font-size:18px;line-height:1;transition:background var(--t),border-color var(--t),color var(--t),transform var(--t)}
+.ver-close:hover{background:rgba(var(--a-rgb),.12);border-color:rgba(var(--a-rgb),.28);color:var(--a);transform:rotate(5deg)}
+.ver-desc{position:relative;z-index:1;margin-top:16px;max-width:500px;color:var(--tx2);font-size:13px;line-height:1.75}
+.ver-meta{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.ver-chip{font-size:10.5px;color:var(--tx3);padding:4px 9px;border-radius:999px;border:1px solid var(--bd);background:rgba(var(--a-rgb),.025)}
+.ver-chip.accent{color:var(--a);border-color:rgba(var(--a-rgb),.22);background:rgba(var(--a-rgb),.08)}
+.ver-body{padding:22px 28px 26px}
+.ver-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:20px}
+.ver-stat{padding:12px 13px;border:1px solid var(--bd);border-radius:12px;background:rgba(var(--a-rgb),.025)}
+.ver-stat b{display:block;font-family:'Syne',sans-serif;font-size:15px;color:var(--tx);margin-bottom:2px}
+.ver-stat span{font-size:10.5px;color:var(--tx3)}
+.ver-sec{margin-top:18px}
+.ver-sec:first-of-type{margin-top:0}
+.ver-sec-hd{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.ver-dot{width:7px;height:7px;border-radius:50%;background:var(--a);box-shadow:0 0 0 4px rgba(var(--a-rgb),.09)}
+.ver-sec h3{font-size:13px;letter-spacing:.01em}
+.ver-list{list-style:none;display:grid;gap:7px}
+.ver-list li{position:relative;padding:9px 11px 9px 28px;border-radius:9px;background:rgba(var(--a-rgb),.022);border:1px solid color-mix(in srgb,var(--bd) 78%,transparent);font-size:12px;color:var(--tx2);line-height:1.55}
+.ver-list li::before{content:'✓';position:absolute;left:10px;top:9px;color:var(--a);font-weight:700}
+.ver-note{margin-top:20px;padding:11px 13px;border-radius:10px;border:1px dashed rgba(var(--a-rgb),.25);background:rgba(var(--a-rgb),.045);font-size:11px;color:var(--tx3);line-height:1.65}
+.ver-note strong{color:var(--a);font-weight:600}
+
+/* ═══════ 13. LOCAL DATA / NAV MANAGER ═══════ */
+.data-overlay{position:fixed;inset:0;z-index:330;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.data-overlay.open{opacity:1;pointer-events:auto}
+.data-modal{width:min(900px,100%);max-height:calc(100vh - 40px);overflow:hidden;display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);border-radius:17px;box-shadow:0 26px 80px rgba(0,0,0,.42);transform:translateY(12px) scale(.99);transition:transform .24s var(--ease),background var(--t)}
+.data-overlay.open .data-modal{transform:none}
+.data-modal.compact{width:min(520px,100%)}
+.data-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:20px 22px;border-bottom:1px solid var(--bd);background:linear-gradient(135deg,rgba(var(--a-rgb),.09),transparent 60%)}
+.data-head h2{font-family:'Syne',sans-serif;font-size:19px;line-height:1.2}.data-head p{margin-top:5px;max-width:650px;color:var(--tx3);font-size:11px;line-height:1.65}
+.data-close{width:31px;height:31px;flex:0 0 31px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--tx2);font-size:17px}
+.data-close:hover{border-color:var(--a);color:var(--a)}
+.mode-switch{display:flex;gap:7px;padding:12px 22px;border-bottom:1px solid var(--bd)}
+.mode-btn{padding:7px 11px;border:1px solid var(--bd);border-radius:999px;background:var(--card);color:var(--tx3);font:500 11px/1.3 inherit}
+.mode-btn.on{border-color:rgba(var(--a-rgb),.3);background:rgba(var(--a-rgb),.08);color:var(--a)}
+.manage-body{min-height:0;display:grid;grid-template-columns:250px minmax(0,1fr);flex:1}
+.manage-cats{min-height:0;padding:15px;border-right:1px solid var(--bd);display:flex;flex-direction:column;gap:12px}
+.manage-sites{min-height:0;padding:15px 18px;display:flex;flex-direction:column}
+.mgr-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}.mgr-title b{font-size:12px}.mgr-title span{font-size:10px;color:var(--tx3)}
+.mgr-add{display:grid;gap:6px}.mgr-row{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:6px}.mgr-row.site{grid-template-columns:minmax(100px,.7fr) minmax(160px,1.3fr) auto}
+.mgr-input{width:100%;min-width:0;padding:8px 9px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:11.5px/1.4 inherit;outline:none}.mgr-input:focus{border-color:var(--a)}
+.mgr-add-btn{padding:7px 10px;border:1px solid rgba(var(--a-rgb),.24);border-radius:8px;background:rgba(var(--a-rgb),.07);color:var(--a);font:600 11px/1.3 inherit;white-space:nowrap}
+.mgr-list{min-height:0;overflow:auto;display:grid;align-content:start;gap:5px;padding-right:2px}
+.mgr-cat{display:flex;align-items:center;gap:6px;border:1px solid transparent;border-radius:8px}.mgr-cat.on{background:rgba(var(--a-rgb),.06);border-color:rgba(var(--a-rgb),.14)}
+.mgr-cat-main{min-width:0;flex:1;padding:7px 8px;border:0;background:none;color:var(--tx2);text-align:left;font:11.5px/1.35 inherit;display:flex;align-items:center;gap:7px}.mgr-cat-main span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mgr-cat-main small{margin-left:auto;color:var(--tx3);font-size:9.5px}
+.mgr-del{width:27px;height:27px;flex:0 0 27px;border:0;border-radius:7px;background:none;color:var(--tx3);font-size:13px}.mgr-del:hover{background:rgba(244,114,182,.08);color:#f472b6}
+.mgr-origin{display:inline-flex;padding:2px 6px;border-radius:999px;border:1px solid var(--bd);color:var(--tx3);font-size:9px;line-height:1.4}.mgr-origin.user{color:var(--a);border-color:rgba(var(--a-rgb),.22)}
+.mgr-site-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:9px}.mgr-site-toolbar .mgr-input{flex:1}.mgr-current{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;min-width:0}.mgr-current span:first-child{font-size:16px}.mgr-current-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mgr-sites-list{min-height:0;overflow:auto;display:grid;align-content:start;gap:6px;margin-top:10px}
+.mgr-site{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px 9px;border:1px solid var(--bd);border-radius:9px;background:rgba(var(--a-rgb),.018)}
+.mgr-site-name{font-size:11.5px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mgr-site-domain{margin-top:2px;font-size:9.5px;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mgr-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;color:var(--tx3);font-size:9.5px}.mgr-restore{border:0;background:none;color:var(--a);font:500 10.5px/1.4 inherit;padding:3px 0}.mgr-restore[disabled]{opacity:.35;cursor:not-allowed}
+.data-empty{padding:24px 12px;text-align:center;color:var(--tx3);font-size:11px;line-height:1.7}
+.backup-body{padding:20px 22px 22px;display:grid;gap:12px;overflow:auto}.backup-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.backup-stat{padding:11px;border:1px solid var(--bd);border-radius:10px;background:rgba(var(--a-rgb),.025)}.backup-stat b{display:block;font-family:'Syne',sans-serif;font-size:14px}.backup-stat span{font-size:9.5px;color:var(--tx3)}
+.backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.backup-action{padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx2);font:600 12px/1.4 inherit}.backup-action:hover{border-color:rgba(var(--a-rgb),.3);color:var(--a);background:rgba(var(--a-rgb),.05)}
+.backup-note{padding:10px 11px;border-radius:9px;border:1px dashed rgba(var(--a-rgb),.2);background:rgba(var(--a-rgb),.035);color:var(--tx3);font-size:10.5px;line-height:1.65}.backup-status{min-height:18px;color:var(--a);font-size:10.5px;line-height:1.5}
+
+/* ═══════ 14. FLOATING ═══════ */
+.float-btns{position:fixed;bottom:20px;right:16px;display:flex;flex-direction:column;align-items:stretch;gap:6px;z-index:80}
+.float-btn{width:90px;height:34px;padding:0 9px;display:flex;align-items:center;justify-content:flex-start;gap:7px;background:rgba(var(--a-rgb),.035);border:1px solid rgba(var(--a-rgb),.11);border-radius:9px;color:var(--tx3);font:500 11px/1 'Noto Sans SC',system-ui,sans-serif;white-space:nowrap;box-shadow:0 2px 9px rgba(0,0,0,.07);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background var(--t),color var(--t),border-color var(--t),transform var(--t),box-shadow var(--t)}
+.float-btn svg{width:13px;height:13px;flex:0 0 13px;opacity:.82}
+@media(hover:hover){
+  .float-btn:hover{background:rgba(var(--a-rgb),.09);color:var(--a);border-color:rgba(var(--a-rgb),.24);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+}
+.float-btn:active{transform:translateY(0) scale(.98);box-shadow:0 1px 5px rgba(0,0,0,.08)}
+.float-btn.btt{display:none}
+.float-btn.btt.show{display:flex}
+
+/* ═══════ 15. ANIMATIONS ═══════ */
+.site-card:nth-child(1){animation-delay:.02s}
+.site-card:nth-child(2){animation-delay:.04s}
+.site-card:nth-child(3){animation-delay:.06s}
+.site-card:nth-child(4){animation-delay:.08s}
+.site-card:nth-child(5){animation-delay:.1s}
+.site-card:nth-child(n+6){animation-delay:.12s}
+
+/* ═══════ 16. REDUCED MOTION ═══════ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+  html{scroll-behavior:auto}
+  .m-tabs::before,.m-tabs::after{display:none}
+  .site-card:hover{transform:none !important}
+}
+
+/* ═══════ 17. RESPONSIVE ═══════ */
+@media(max-width:1024px){
+  .sidebar{display:none}.main{margin-left:0}.m-tabs{display:block}
+  .content{padding:8px 24px 80px}.hero{padding:36px 24px 24px}
+  .cat-sec{scroll-margin-top:70px}
+  .hero h1{font-size:25px}.site-footer{margin:0 24px}
+  .settings-trigger,.backup-trigger{top:14px}.settings-trigger{right:14px}.backup-trigger{right:60px}
+  .hero-inner{grid-template-columns:minmax(0,1fr) minmax(250px,36vw);gap:20px}
+}
+@media(max-width:768px){
+  .content{padding:8px 16px 90px}.hero{padding:26px 16px 20px}
+  .hero-inner{grid-template-columns:1fr}.hero-media{justify-self:stretch;width:100%;margin-top:6px}.hero-media-frame{max-height:230px;border-radius:13px}.hero-media.max-ratio .hero-media-frame{height:230px;min-height:0;max-height:230px}
+  .hero h1{font-size:22px}.hero-sub{font-size:13px}
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px}
+  .cat-sec{padding-top:28px}.float-btns{bottom:12px;right:10px;gap:5px}
+  .float-btn{width:86px;height:32px;padding:0 8px;gap:6px;font-size:10.5px}
+  .float-btn svg{width:12px;height:12px;flex-basis:12px}
+  .site-footer{margin:0 16px;padding:22px 0}
+}
+@media(max-width:480px){
+  .card-grid{grid-template-columns:repeat(2,1fr);gap:7px}
+  .site-card{padding:9px 10px;gap:8px}
+  .card-name{font-size:12px}.hero h1{font-size:20px}
+  .search-input{padding:11px 10px;font-size:14px}
+  .engines{gap:5px}.eng-btn{padding:4px 10px;font-size:11px}
+  .ver-overlay{padding:12px}
+  .ver-modal{max-height:calc(100vh - 24px);border-radius:15px}
+  .ver-hero{padding:22px 18px 18px}.ver-body{padding:18px}
+  .ver-mark{width:36px;height:36px;border-radius:10px;font-size:17px}
+  .ver-title h2{font-size:20px}.ver-desc{font-size:12px;margin-top:13px}
+  .ver-summary{grid-template-columns:1fr;gap:6px}
+  .ver-stat{display:flex;align-items:center;justify-content:space-between;padding:9px 11px}
+  .ver-stat b{margin:0;font-size:13px}.ver-list li{font-size:11.5px}
+  .data-overlay{padding:10px}.data-modal{max-height:calc(100vh - 20px);border-radius:14px}.data-head{padding:16px}.mode-switch{padding:10px 16px;overflow-x:auto}.manage-body{grid-template-columns:1fr;overflow:auto}.manage-cats{border-right:0;border-bottom:1px solid var(--bd);max-height:290px}.manage-sites{min-height:420px}.mgr-row.site{grid-template-columns:1fr}.mgr-row.site .mgr-add-btn{width:100%}.backup-summary{grid-template-columns:1fr}.backup-actions{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#content">跳转到主要内容</a>
+<noscript><div style="text-align:center;padding:80px 20px;font-family:system-ui"><h2>请启用 JavaScript 以使用喵喵起始页</h2><p style="color:#888;margin-top:8px">本站依赖 JavaScript 运行</p></div></noscript>
+<div class="app">
+
+<aside class="sidebar">
+  <div class="sb-brand"><div class="brand-title">喵喵起始页</div><p>CATCAT NAV</p></div>
+  <nav class="sb-nav" id="sbNav" aria-label="网站分类导航"></nav>
+</aside>
+
+<main class="main">
+  <header class="hero">
+    <div class="hero-inner no-media" id="heroInner">
+      <div class="hero-copy">
+        <div class="hero-row"><span class="hero-time" id="heroTime"></span></div>
+        <h1 id="heroTitle"></h1>
+        <p class="hero-sub">快速搜索或浏览下方网站，一键直达你需要的一切</p>
+        <div class="search-area" role="search">
+          <div class="search-box">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="sInput" placeholder="" autocomplete="off" aria-label="搜索网站">
+            <button type="button" class="search-clear" id="sClear" aria-label="清除搜索">&times;</button>
+            <kbd class="search-kbd" aria-hidden="true">/</kbd>
+          </div>
+          <div class="search-hint" id="sHint"></div>
+          <div class="engines" id="engs" role="group" aria-label="搜索引擎选择"><span class="eng-label">搜索引擎：</span></div>
+          <div class="search-count" id="sCount" role="status" aria-live="polite"></div>
+          <div class="search-empty-hint" id="sEmpty">按 <kbd>Enter</kbd> 用 <span id="sEngName"></span> 搜索「<span id="sEngQ"></span>」</div>
+          <div class="hero-help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><div>默认分类和网站由本站配置提供；你的增删、展示图等个性化内容只保存在当前浏览器，可通过右上角“数据备份”导入导出。 <button type="button" id="heroManageBtn">管理我的导航</button></div></div>
+        </div>
+      </div>
+      <div class="hero-media" id="heroMedia" hidden>
+        <div class="hero-media-frame" id="heroMediaFrame"><img id="heroMediaImg" alt="" decoding="async" referrerpolicy="origin"><div class="hero-media-error" id="heroMediaError">展示图加载失败，请在设置中检查图片地址或重新选择本地图片。</div><span class="hero-media-badge" id="heroMediaBadge"></span></div>
+      </div>
+    </div>
+  </header>
+  <nav class="m-tabs" id="mTabs" aria-label="移动端分类导航"><div class="m-tabs-in" id="mTabsIn"></div></nav>
+  <div class="content" id="content"><div class="page-skeleton" id="pageSkeleton" aria-hidden="true"><div class="skel-section"><div class="skel-head skel-block"></div><div class="skel-grid"><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div></div></div><div class="skel-section"><div class="skel-head skel-block"></div><div class="skel-grid"><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div><div class="skel-card skel-block"></div></div></div></div></div>
+  <footer class="site-footer">
+    <div class="footer-row">
+      <button type="button" class="footer-version" id="versionTrig" aria-haspopup="dialog" aria-expanded="false" aria-controls="versionModal">当前版本 <strong>v1.3.6F</strong></button><span class="sep">丨</span>
+      <a href="doc/privacy/index.html">隐私守护</a><span class="sep">丨</span>
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">湘ICP备********号-1</a><span class="sep">丨</span>
+      <a href="https://icp.gov.moe/?keyword=" target="_blank" rel="noopener noreferrer">萌ICP备********号</a><span class="sep">丨</span>
+      <a href="http://itest.top" target="_blank" rel="noopener noreferrer">喵喵博客</a><span class="sep">丨</span>
+      <a href="https://icat.top/win" target="_blank" rel="noopener noreferrer">时光Boot</a><span class="sep">丨</span>
+      <a href="https://plaidwork.github.io" target="_blank" rel="noopener noreferrer">Github</a>
+    </div>
+    <div class="footer-copy">&copy; <span id="footerYear"></span>&nbsp;喵喵起始页 CATCAT NAV</div>
+  </footer>
+</main>
+</div>
+
+<div class="ver-overlay" id="versionOverlay" aria-hidden="true" inert>
+  <section class="ver-modal" id="versionModal" role="dialog" aria-modal="true" aria-labelledby="versionTitle" aria-describedby="versionDesc">
+    <div class="ver-hero">
+      <div class="ver-top">
+        <div class="ver-brand">
+          <div class="ver-mark" aria-hidden="true">🐱</div>
+          <div><div class="ver-kicker">CATCAT NAV · RELEASE NOTES</div><div class="ver-title"><h2 id="versionTitle">更新日志</h2><span class="ver-badge">v1.3.6F</span></div></div>
+        </div>
+        <button type="button" class="ver-close" id="versionClose" aria-label="关闭更新日志">&times;</button>
+      </div>
+      <p class="ver-desc" id="versionDesc">修复云端默认展示图在地址可用时仍可能不显示的问题，并完善慢速加载、旧设置兼容和自动恢复体验。</p>
+      <div class="ver-meta"><span class="ver-chip accent">细节修订版</span><span class="ver-chip">当前版本 v1.3.6F</span><span class="ver-chip">上一版本 v1.3.6E</span></div>
+    </div>
+    <div class="ver-body">
+      <div class="ver-summary" aria-label="版本摘要">
+        <div class="ver-stat"><b>2 种模式</b><span>默认增强 / 完全自定义</span></div>
+        <div class="ver-stat"><b>本地备份</b><span>JSON 导入 / 导出</span></div>
+        <div class="ver-stat"><b>Hero 展示图</b><span>云端 / URL / 本地</span></div>
+      </div>
+      <section class="ver-sec">
+        <div class="ver-sec-hd"><span class="ver-dot" aria-hidden="true"></span><h3>个性化导航</h3></div>
+        <ul class="ver-list">
+          <li>新增“默认配置 + 本地自定义”和“完全自定义”两种模式，可按自己的使用习惯管理导航。</li>
+          <li>支持新增分类和网站，也可以隐藏不需要的默认分类或网站，并可随时恢复。</li>
+          <li>自定义内容保存在当前浏览器，不会修改网站提供的默认导航配置。</li>
+        </ul>
+      </section>
+      <section class="ver-sec">
+        <div class="ver-sec-hd"><span class="ver-dot" aria-hidden="true"></span><h3>Hero 展示图</h3></div>
+        <ul class="ver-list">
+          <li>新增 Hero 图片卡片样式开关，可一键开启或关闭圆角、边框和阴影，适配不同风格的展示图。</li>
+          <li>修复云端默认展示图在部分浏览器或旧版本设置下无法正常显示的问题；加载较慢时会先收起图片区域，但不会中断正在进行的加载，成功后自动恢复显示。</li>
+          <li>支持云端默认展示图、自定义图片链接、本地图片和关闭展示四种方式。</li>
+          <li>新增 16:9、4:3、1:1、最大比例和自定义尺寸，可根据页面布局自由调整展示效果。</li>
+          <li>修复云端默认展示图不显示、本地图片无法正常选择，以及切换图片比例后视觉没有变化的问题。</li>
+          <li>优化桌面端 Hero 图片位置与移动端适配，图片加载较慢时提供加载占位，减少页面突变。</li>
+        </ul>
+      </section>
+      <section class="ver-sec">
+        <div class="ver-sec-hd"><span class="ver-dot" aria-hidden="true"></span><h3>搜索与导航</h3></div>
+        <ul class="ver-list">
+          <li>站内搜索支持网站名称、分类名称和域名匹配，无匹配结果时可直接使用搜索引擎继续搜索。</li>
+          <li>支持多种搜索引擎快速切换，并自动记住用户选择。</li>
+          <li>修复左侧分类导航跳转不准确、连续点击后失效以及多个分类同时高亮的问题。</li>
+          <li>完善桌面端与移动端分类导航，让长页面浏览和快速定位更顺畅。</li>
+        </ul>
+      </section>
+      <section class="ver-sec">
+        <div class="ver-sec-hd"><span class="ver-dot" aria-hidden="true"></span><h3>备份与使用体验</h3></div>
+        <ul class="ver-list">
+          <li>新增 JSON 数据导入与导出，可备份自定义导航、Hero 展示图、主题和搜索偏好。</li>
+          <li>新增深色、浅色、跟随系统和多套主题色，并记住当前浏览器的个性化设置。</li>
+          <li>优化右上角设置与数据备份按钮，以及 SSL、AI 聊天、回到顶部等快捷操作的视觉样式。</li>
+          <li>优化站点图标加载、首屏骨架占位、键盘操作和移动端布局，提升日常使用体验。</li>
+        </ul>
+      </section>
+      <div class="ver-note"><strong>版本说明：</strong>v1.3.6F 重点修复云端默认展示图的加载与恢复问题：兼容旧版本遗留的隐藏状态，慢速加载不再被提前中断，并优化图片请求兼容性。继续保持单 HTML 部署。</div>
+    </div>
+  </section>
+</div>
+
+<div class="data-overlay" id="navMgrOverlay" aria-hidden="true" inert>
+  <section class="data-modal" id="navMgrModal" role="dialog" aria-modal="true" aria-labelledby="navMgrTitle">
+    <div class="data-head"><div><h2 id="navMgrTitle">导航管理</h2><p>默认配置来自网站部署内容；“隐藏默认项”只记录在当前浏览器，不会修改云端配置。完全自定义模式只显示你自己创建的分类与网站。</p></div><button type="button" class="data-close" id="navMgrClose" aria-label="关闭导航管理">&times;</button></div>
+    <div class="mode-switch" id="mgrModeSwitch"><button type="button" class="mode-btn" data-mode="extend">默认配置 + 本地自定义</button><button type="button" class="mode-btn" data-mode="custom">完全自定义</button></div>
+    <div class="manage-body">
+      <aside class="manage-cats"><div><div class="mgr-title"><b>网站分类</b><span id="mgrCatCount"></span></div><div class="mgr-add"><div class="mgr-row"><input class="mgr-input" id="newCatIcon" maxlength="4" value="📁" aria-label="分类图标"><input class="mgr-input" id="newCatName" maxlength="20" placeholder="新分类名称" aria-label="新分类名称"><button type="button" class="mgr-add-btn" id="addCatBtn">添加</button></div></div></div><div class="mgr-list" id="mgrCatList"></div><div class="mgr-foot"><span id="mgrHiddenInfo"></span><button type="button" class="mgr-restore" id="restoreDefaultsBtn">恢复隐藏的默认项</button></div></aside>
+      <section class="manage-sites"><div class="mgr-title"><div class="mgr-current" id="mgrCurrentCat"></div><span id="mgrSiteCount"></span></div><div class="mgr-row site" id="addSiteRow"><input class="mgr-input" id="newSiteName" maxlength="40" placeholder="网站名称" aria-label="网站名称"><input class="mgr-input" id="newSiteUrl" maxlength="2048" placeholder="https://example.com" aria-label="网站链接"><button type="button" class="mgr-add-btn" id="addSiteBtn">添加网站</button></div><div class="mgr-site-toolbar"><input class="mgr-input" id="mgrSiteSearch" placeholder="筛选当前分类的网站" aria-label="筛选当前分类的网站"></div><div class="mgr-sites-list" id="mgrSiteList"></div></section>
+    </div>
+  </section>
+</div>
+
+<div class="data-overlay" id="backupOverlay" aria-hidden="true" inert>
+  <section class="data-modal compact" id="backupModal" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+    <div class="data-head"><div><h2 id="backupTitle">数据备份</h2><p>导出的 JSON 会包含本地导航、Hero 展示图以及主题/搜索偏好。默认云端网站数据不会重复写入备份文件。</p></div><button type="button" class="data-close" id="backupClose" aria-label="关闭数据备份">&times;</button></div>
+    <div class="backup-body"><div class="backup-summary"><div class="backup-stat"><b id="backupCatStat">0</b><span>自定义分类</span></div><div class="backup-stat"><b id="backupSiteStat">0</b><span>自定义网站</span></div><div class="backup-stat"><b id="backupHeroStat">默认</b><span>Hero 图片来源</span></div></div><div class="backup-actions"><button type="button" class="backup-action" id="exportBtn">↓ 导出 JSON 备份</button><button type="button" class="backup-action" id="importBtn">↑ 导入 JSON 备份</button></div><input type="file" id="importFile" accept="application/json,.json" hidden><div class="backup-note">导入会覆盖当前浏览器中的本地个性化数据，但不会修改网站默认配置。建议重大调整前先导出一份备份。</div><div class="backup-status" id="backupStatus" role="status" aria-live="polite"></div></div>
+  </section>
+</div>
+
+<button type="button" class="backup-trigger" id="backupTrig" aria-label="数据备份与导入导出" title="数据备份 / 导入导出" aria-haspopup="dialog" aria-expanded="false" aria-controls="backupModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="8" cy="5.5" rx="4.5" ry="2.2"/><path d="M3.5 5.5v5c0 1.2 2 2.2 4.5 2.2 1.1 0 2.1-.2 2.9-.5"/><path d="M3.5 10.5v5c0 1.2 2 2.2 4.5 2.2 1.2 0 2.3-.2 3.1-.6"/><path d="M14 8h6"/><path d="m18 5.5 2.5 2.5-2.5 2.5"/><path d="M20 16h-6"/><path d="m16 13.5-2.5 2.5 2.5 2.5"/></svg></button>
+
+<button type="button" class="settings-trigger" id="sTrig" aria-label="打开设置" title="设置 (快捷键 S)" aria-haspopup="dialog" aria-expanded="false" aria-controls="spPn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</button>
+<!-- ★ 改进：role="dialog" 从遮罩层移至面板，屏幕阅读器正确识别对话框 -->
+<div class="sp-overlay" id="spOv" aria-hidden="true" inert>
+  <div class="sp-panel" id="spPn" role="dialog" aria-modal="true" aria-label="设置面板">
+    <div class="sp-head"><h2>⚙ 设置</h2><button type="button" class="sp-x" id="spX" aria-label="关闭设置">&times;</button></div>
+    <div class="sp-sec"><div class="sp-lbl">外观模式</div>
+      <div class="sp-toggles" id="thTog" role="group" aria-label="外观模式">
+        <button type="button" class="sp-opt" data-v="auto" aria-pressed="false">🔄 跟随系统</button>
+        <button type="button" class="sp-opt" data-v="dark" aria-pressed="false">🌙 深色</button>
+        <button type="button" class="sp-opt" data-v="light" aria-pressed="false">☀️ 浅色</button>
+      </div>
+    </div>
+    <div class="sp-sec"><div class="sp-lbl">主题色</div><div class="swatches" id="swWrap" role="group" aria-label="主题色"><button type="button" class="swatch" data-c="gold" aria-label="金色" aria-pressed="false"></button><button type="button" class="swatch" data-c="blue" aria-label="蓝色" aria-pressed="false"></button><button type="button" class="swatch" data-c="green" aria-label="绿色" aria-pressed="false"></button><button type="button" class="swatch" data-c="rose" aria-label="粉色" aria-pressed="false"></button><button type="button" class="swatch" data-c="violet" aria-label="紫色" aria-pressed="false"></button><button type="button" class="swatch" data-c="teal" aria-label="青色" aria-pressed="false"></button><button type="button" class="swatch" data-c="orange" aria-label="橙色" aria-pressed="false"></button><button type="button" class="swatch" data-c="sky" aria-label="天蓝" aria-pressed="false"></button></div></div>
+    <div class="sp-sec"><div class="sp-lbl">默认搜索引擎（回车触发）</div><div class="sp-toggles" id="spEng" role="group" aria-label="默认搜索引擎"></div></div>
+    <div class="sp-sec"><div class="sp-lbl">我的导航</div><div class="sp-toggles" id="navModeTog" role="group" aria-label="导航数据模式"><button type="button" class="sp-opt" data-mode="extend">默认 + 自定义</button><button type="button" class="sp-opt" data-mode="custom">完全自定义</button></div><div class="sp-help">默认配置由网站提供；你的隐藏、添加和删除记录只保存在当前浏览器。</div><button type="button" class="sp-action" id="openNavMgrBtn">管理分类与网站</button></div>
+    <div class="sp-sec"><div class="sp-lbl">Hero 展示图</div><label class="sp-field"><span>图片来源</span><select class="sp-select" id="heroSource"><option value="default">云端默认配置</option><option value="url">自定义图片链接</option><option value="local">本地图片</option><option value="off">不显示</option></select></label><div class="sp-help">云端默认展示图加载失败或长时间无响应时会自动收起，不显示空白错误框，并在稍后自动重试；也可点击下方按钮立即重新加载。</div><label class="sp-field" id="heroUrlField"><span>图片链接（HTTP / HTTPS）</span><input class="sp-input" id="heroUrl" maxlength="2048" placeholder="https://example.com/image.jpg"></label><button type="button" class="sp-action" id="heroUrlApply">应用图片链接</button><div class="sp-file-row"><button type="button" class="sp-action" id="heroFileBtn" style="width:auto;margin-top:0">选择本地图片</button><span class="sp-file-name" id="heroFileName">未选择</span></div><input type="file" id="heroFile" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden><div class="sp-help">本地图片最大 1.2 MB、最大 6000×6000；图片会以浏览器本地数据保存并随备份导出。</div><div class="sp-switch-row"><div class="sp-switch-copy"><b>图片卡片样式</b><span>控制圆角、边框与阴影效果</span></div><button type="button" class="sp-switch" id="heroFrameStyle" role="switch" aria-checked="true" aria-label="Hero 图片卡片样式"></button></div><div class="sp-lbl" style="margin-top:12px">容器比例</div><div class="sp-ratios" id="heroRatioTog"><button type="button" class="sp-mini" data-ratio="16:9">16:9</button><button type="button" class="sp-mini" data-ratio="4:3">4:3</button><button type="button" class="sp-mini" data-ratio="1:1">1:1</button><button type="button" class="sp-mini" data-ratio="max">最大比例</button><button type="button" class="sp-mini" data-ratio="custom">自定义</button></div><div class="sp-inline" id="heroCustomSize"><label class="sp-field"><span>宽度 220–420</span><input type="number" class="sp-input" id="heroWidth" min="220" max="420" step="10"></label><label class="sp-field"><span>高度 140–320</span><input type="number" class="sp-input" id="heroHeight" min="140" max="320" step="10"></label></div><button type="button" class="sp-action" id="heroReset">重新加载 / 恢复云端默认图片</button></div>
+    <div class="sp-sec" style="margin-top:36px;opacity:.5"><div class="sp-lbl">快捷键</div><div style="font-size:12px;color:var(--tx3);line-height:2"><kbd style="padding:2px 7px;border:1px solid var(--bd);border-radius:4px;font-size:10.5px;background:var(--card)">/</kbd> 聚焦搜索 &nbsp;<kbd style="padding:2px 7px;border:1px solid var(--bd);border-radius:4px;font-size:10.5px;background:var(--card)">S</kbd> 打开设置 &nbsp;<kbd style="padding:2px 7px;border:1px solid var(--bd);border-radius:4px;font-size:10.5px;background:var(--card)">Esc</kbd> 关闭面板</div></div>
+  </div>
+</div>
+
+<div class="float-btns" aria-label="快捷操作">
+  <a class="float-btn" href="https://myssl.com/icat.top?from=mysslid" target="_blank" rel="noopener noreferrer" title="SSL安全认证"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>SSL 认证</span></a>
+  <a class="float-btn" href="https://www.deepseek.com" target="_blank" rel="noopener noreferrer" title="AI聊天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg><span>AI 聊天</span></a>
+  <button type="button" class="float-btn btt" id="btt" aria-label="回到顶部" title="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg><span>回到顶部</span></button>
+</div>
+
+<script>
+;(function(){
+'use strict';
+
+const DEFAULT_SITES=[
+  {c:"热门推荐",n:"DeepL翻译",u:"https://www.deepl.com/translator"},{c:"热门推荐",n:"QQ邮箱",u:"https://mail.qq.com"},{c:"热门推荐",n:"打字练习",u:"https://dazidazi.com"},{c:"热门推荐",n:"微信开发",u:"https://mp.weixin.qq.com"},{c:"热门推荐",n:"百度网盘",u:"https://pan.baidu.com"},{c:"热门推荐",n:"阿里云盘",u:"https://www.aliyundrive.com"},{c:"热门推荐",n:"网易邮箱",u:"https://mail.163.com"},{c:"热门推荐",n:"Outlook",u:"https://outlook.live.com"},{c:"热门推荐",n:"Gmail",u:"https://mail.google.com"},{c:"热门推荐",n:"新浪邮箱",u:"https://mail.sina.com.cn"},{c:"热门推荐",n:"钉钉办公",u:"https://www.dingtalk.com"},{c:"热门推荐",n:"企业微信",u:"https://work.weixin.qq.com"},{c:"热门推荐",n:"阿里邮箱",u:"https://mail.aliyun.com"},{c:"热门推荐",n:"小米MiMo",u:"https://aistudio.xiaomimimo.com"},{c:"热门推荐",n:"文心一言",u:"https://yiyan.baidu.com/welcome"},{c:"热门推荐",n:"腾讯元宝",u:"https://yuanbao.tencent.com"},{c:"热门推荐",n:"讯飞星火",u:"https://xinghuo.xfyun.cn"},{c:"热门推荐",n:"通义千问",u:"https://tongyi.aliyun.com"},{c:"热门推荐",n:"通义听悟",u:"https://tingwu.aliyun.com/home"},{c:"热门推荐",n:"kimi",u:"https://www.kimi.com"},{c:"热门推荐",n:"豆包",u:"https://www.doubao.com"},{c:"热门推荐",n:"即梦AI",u:"https://jimeng.jianying.com"},{c:"热门推荐",n:"智谱清言",u:"https://chatglm.cn"},{c:"热门推荐",n:"next AIGC",u:"https://www.learnprompt.pro"},{c:"热门推荐",n:"提示工程",u:"https://www.promptingguide.ai/zh"},{c:"热门推荐",n:"DeepSeek",u:"https://chat.deepseek.com"},{c:"热门推荐",n:"Gemini",u:"https://gemini.google.com"},{c:"热门推荐",n:"ChatGPT",u:"https://chatgpt.com"},{c:"热门推荐",n:"即时AI",u:"https://wegic.ai/zh-cn"},{c:"热门推荐",n:"GPT image",u:"https://gpt-image-playground.cooksleep.dev/?apiUrl=https://enterprise.hallucodex.com&apiKey=&model=gpt-image-2.5-flare,gpt-image-2.5-sunburst"},
+  {c:"影音媒体",n:"腾讯视频",u:"https://v.qq.com"},{c:"影音媒体",n:"哔哩哔哩",u:"https://www.bilibili.com"},{c:"影音媒体",n:"QQ音乐",u:"https://y.qq.com"},{c:"影音媒体",n:"优酷视频",u:"https://www.youku.com"},{c:"影音媒体",n:"抖音视频",u:"https://www.douyin.com"},{c:"影音媒体",n:"网易音乐",u:"https://music.163.com"},{c:"影音媒体",n:"爱奇艺",u:"https://www.iqiyi.com"},{c:"影音媒体",n:"芒果TV",u:"https://www.mgtv.com"},{c:"影音媒体",n:"CCTV",u:"https://tv.cctv.com"},{c:"影音媒体",n:"AcFun",u:"https://www.acfun.cn"},{c:"影音媒体",n:"YouTube",u:"https://www.youtube.com"},{c:"影音媒体",n:"NetFlix",u:"https://www.netflix.com"},{c:"影音媒体",n:"影猫仓库",u:"https://ymck.me"},{c:"影音媒体",n:"一起看视频",u:"https://videotogether.github.io"},{c:"影音媒体",n:"文件传输",u:"https://musetransfer.com"},
+  {c:"购物休闲",n:"淘宝",u:"https://www.taobao.com"},{c:"购物休闲",n:"京东",u:"https://www.jd.com"},{c:"购物休闲",n:"当当",u:"https://www.dangdang.com"},{c:"购物休闲",n:"拼多多",u:"https://www.pinduoduo.com"},{c:"购物休闲",n:"网易严选",u:"https://you.163.com"},{c:"购物休闲",n:"苏宁易购",u:"https://www.suning.com"},{c:"购物休闲",n:"亚马逊",u:"https://www.amazon.cn"},{c:"购物休闲",n:"Steam",u:"https://store.steampowered.com"},{c:"购物休闲",n:"Epic",u:"https://store.epicgames.com/zh-CN"},{c:"购物休闲",n:"WeGame",u:"https://www.wegame.com.cn"},
+  {c:"资讯社交",n:"澎湃新闻",u:"https://www.thepaper.cn"},{c:"资讯社交",n:"微博",u:"https://weibo.com/login.php"},{c:"资讯社交",n:"知乎",u:"https://www.zhihu.com"},{c:"资讯社交",n:"36氪",u:"https://36kr.com"},{c:"资讯社交",n:"掘金",u:"https://juejin.cn"},{c:"资讯社交",n:"豆瓣",u:"https://www.douban.com"},{c:"资讯社交",n:"V2EX",u:"https://www.v2ex.com"},{c:"资讯社交",n:"Twitter",u:"https://twitter.com"},{c:"资讯社交",n:"Facebook",u:"https://www.facebook.com"},{c:"资讯社交",n:"框框大学",u:"https://www.kkdaxue.com"},{c:"资讯社交",n:"Instagram",u:"https://www.instagram.com"},
+  {c:"设计视觉",n:"创造狮",u:"https://chuangzaoshi.com"},{c:"设计视觉",n:"zcool站酷",u:"https://www.zcool.com.cn"},{c:"设计视觉",n:"阿里图标",u:"https://www.iconfont.cn"},{c:"设计视觉",n:"花瓣网",u:"https://huaban.com"},{c:"设计视觉",n:"创客贴",u:"https://www.chuangkit.com"},{c:"设计视觉",n:"Dribbble",u:"https://dribbble.com"},{c:"设计视觉",n:"Mixkit",u:"https://mixkit.co"},{c:"设计视觉",n:"Universe",u:"https://uiverse.io"},{c:"设计视觉",n:"偷懒工具",u:"https://toolight.cn"},
+  {c:"学习充电",n:"腾讯课堂",u:"https://ke.qq.com"},{c:"学习充电",n:"慕课网",u:"https://www.imooc.com"},{c:"学习充电",n:"网易云课堂",u:"https://study.163.com"},{c:"学习充电",n:"WPS学堂",u:"https://www.wps.cn/learning"},{c:"学习充电",n:"懒人Excel",u:"https://www.lanrenexcel.com"},{c:"学习充电",n:"中国大学MOOC",u:"https://www.icourse163.org"},{c:"学习充电",n:"菜鸟教程",u:"https://www.runoob.com"},{c:"学习充电",n:"W3School",u:"https://www.w3school.com.cn"},{c:"学习充电",n:"极客时间",u:"https://time.geekbang.org"},{c:"学习充电",n:"合天网安",u:"https://www.hetianlab.com"},{c:"学习充电",n:"QAdoc",u:"https://qadoc.cn"},{c:"学习充电",n:"风变编程",u:"https://www.pypypy.cn"},{c:"学习充电",n:"软仓",u:"https://www.ruancang.net"},
+  {c:"搜索引擎",n:"必应搜索",u:"https://cn.bing.com"},{c:"搜索引擎",n:"搜狗微信",u:"https://weixin.sogou.com"},{c:"搜索引擎",n:"360搜索",u:"https://www.so.com"},{c:"搜索引擎",n:"Fsou",u:"https://fsoufsou.com"},{c:"搜索引擎",n:"UP云搜",u:"https://www.upyunso.com"},{c:"搜索引擎",n:"谷歌搜索",u:"https://www.google.com"},
+  {c:"在线工具",n:"文件传输助手",u:"https://filehelper.weixin.qq.com/"},{c:"在线工具",n:"Miku工具",u:"https://tools.miku.ac"},{c:"在线工具",n:"JPG压缩",u:"https://www.picdiet.com/zh-cn"},{c:"在线工具",n:"TinyPNG",u:"https://tinypng.com"},{c:"在线工具",n:"腾讯文档",u:"https://docs.qq.com"},{c:"在线工具",n:"Office",u:"https://www.office.com"},{c:"在线工具",n:"MSDN下载",u:"https://msdn.itellyou.cn"},{c:"在线工具",n:"IP查询",u:"https://ipw.cn"},{c:"在线工具",n:"DNSLog",u:"https://dnslog.cn"},{c:"在线工具",n:"贝赛尔曲线",u:"https://cubic-bezier.com"},{c:"在线工具",n:"图像优化",u:"https://zh.recompressor.com"},{c:"在线工具",n:"SVG压缩",u:"https://tool.mkblog.cn/svgo"},{c:"在线工具",n:"时光Boot",u:"https://flowus.cn/boot/share/4feb1624-943e-487d-8b69-4301c7ab61f3"},{c:"在线工具",n:"GitHub加速",u:"https://ghproxy.com/"},
+  {c:"程序人生",n:"Github",u:"https://github.com"},{c:"程序人生",n:"Gitee码云",u:"https://gitee.com"},{c:"程序人生",n:"Codepen",u:"https://codepen.io"},{c:"程序人生",n:"腾讯云",u:"https://cloud.tencent.com/login"},{c:"程序人生",n:"阿里云",u:"https://account.aliyun.com/login/login.htm"},{c:"程序人生",n:"华为云",u:"https://auth.huaweicloud.com/authui"},{c:"程序人生",n:"云+社区",u:"https://cloud.tencent.com/developer"},{c:"程序人生",n:"云栖社区",u:"https://developer.aliyun.com"},{c:"程序人生",n:"吾爱破解",u:"https://www.52pojie.cn"},{c:"程序人生",n:"SF思否",u:"https://segmentfault.com"},{c:"程序人生",n:"IT熊猫",u:"https://itpanda.net/book"},{c:"程序人生",n:"网道文档",u:"https://wangdoc.com"},{c:"程序人生",n:"提交收录",u:"https://support.qq.com/product/64799"},{c:"程序人生",n:"浏览器检测",u:"https://www.ghxi.com/llq"},{c:"程序人生",n:"VupLive",u:"https://vup.darkflame.ga/online"},
+  /* ★ 改进：msdn.itellyou 和 tbtool 从 HTTP 改为 HTTPS */
+  {c:"装机必备",n:"UU远程精简版",u:"https://uuyc.163.com/features/sos/"},{c:"装机必备",n:"Windows 10",u:"https://www.microsoft.com/zh-cn/software-download/windows10"},{c:"装机必备",n:"msdn.itellyou",u:"https://msdn.itellyou.cn/"},{c:"装机必备",n:"专注于Win10",u:"https://iwin10.net/"},{c:"装机必备",n:"Rufus",u:"https://rufus.ie/zh/"},{c:"装机必备",n:"GeForce驱动",u:"https://www.nvidia.cn/software/nvidia-app"},{c:"装机必备",n:"英特尔助手",u:"https://www.intel.cn/content/www/cn/zh/support/detect.html"},{c:"装机必备",n:"AMD驱动程序",u:"https://www.amd.com/zh-cn/support/download/drivers.html"},{c:"装机必备",n:"AMD清理工具",u:"https://drivers.amd.com/drivers/amdcleanuputility.exe"},{c:"装机必备",n:"文件传输助手",u:"https://filehelper.weixin.qq.com/"},{c:"装机必备",n:"火绒安全",u:"https://www.huorong.cn/"},{c:"装机必备",n:"图吧工具箱",u:"https://www.tbtool.cn/"},{c:"装机必备",n:"360驱动大师",u:"https://dm.weishi.360.cn/home.html"},{c:"装机必备",n:"DiskGenius",u:"https://www.diskgenius.cn"},{c:"装机必备",n:"网易UU远程",u:"https://uuyc.163.com/"},{c:"装机必备",n:"傲梅分区助手",u:"https://www.disktool.cn/"},{c:"装机必备",n:"HiPC移动助手",u:"https://hipc.cn/"},{c:"装机必备",n:"腾讯电脑管家",u:"https://guanjia.qq.com/"},{c:"装机必备",n:"Geek卸载程序",u:"https://geekuninstaller.com/"},{c:"装机必备",n:"Bandizip",u:"https://www.bandisoft.com/bandizip/"},{c:"装机必备",n:"Dism++",u:"https://github.com/Chuyu-Team/Dism-Multi-language/releases"},{c:"装机必备",n:"MemReduct",u:"https://github.com/henrypp/memreduct/releases"},{c:"装机必备",n:"腾讯QQ",u:"https://im.qq.com/index"},{c:"装机必备",n:"Office 套件",u:"https://otp.landian.vip/"},{c:"装机必备",n:"微信WeChat",u:"https://weixin.qq.com/"},{c:"装机必备",n:"ZyperWin++",u:"https://github.com/ZyperWave/ZyperWinOptimize/releases"},{c:"装机必备",n:"Edge Monitor",u:"https://github.com/PrelinaMontelli/Edge-Monitor/releases"},{c:"装机必备",n:"Windows Memory Cleaner",u:"https://github.com/IgorMundstein/WinMemoryCleaner/releases"},{c:"装机必备",n:"InsightCleanerAI",u:"https://github.com/xiakkto/InsightCleanerAI/releases"},{c:"装机必备",n:"HiBit Uninstaller",u:"https://www.hibitsoft.ir"},{c:"装机必备",n:"FixWin 11",u:"https://www.thewindowsclub.com/fixwin-windows-pc-repair-software"},{c:"装机必备",n:"喵喵起始页",u:"https://icat.top"},{c:"装机必备",n:"谷歌浏览器",u:"https://www.google.cn/chrome"},{c:"装机必备",n:"硬件茶谈",u:"https://www.bilibili.com/video/BV1BG4y137mG"},{c:"装机必备",n:"-伊卡洛斯-",u:"https://www.bilibili.com/video/BV1G5411x7Xw"},{c:"装机必备",n:"喵喵折App",u:"https://www.bilibili.com/video/BV1At411X7Wz"},{c:"装机必备",n:"天才赵德柱",u:"https://www.bilibili.com/video/BV1UU4y1c74o"}
+];
+const DEFAULT_CATS=[{k:'热门推荐',i:'🔥'},{k:'搜索引擎',i:'🔍'},{k:'在线工具',i:'🛠'},{k:'资讯社交',i:'📰'},{k:'影音媒体',i:'🎬'},{k:'购物休闲',i:'🛒'},{k:'设计视觉',i:'🎨'},{k:'学习充电',i:'📚'},{k:'程序人生',i:'💻'},{k:'装机必备',i:'🖥'}];
+/* 云端默认展示图：部署维护者可直接在这里设置 src；用户选择“云端默认配置”时读取此处。 */
+const DEFAULT_HERO_MEDIA={src:'https://api.icat.top/LabTime/images/Bing',ratio:'16:9',width:380,height:214,alt:'喵喵起始页展示图'};
+const ENGS=[{n:'百度',fn:q=>'https://www.baidu.com/s?wd='+encodeURIComponent(q)},{n:'必应',fn:q=>'https://www.bing.com/search?q='+encodeURIComponent(q)},{n:'谷歌',fn:q=>'https://www.google.com/search?q='+encodeURIComponent(q)},{n:'DuckDuckGo',fn:q=>'https://duckduckgo.com/?q='+encodeURIComponent(q)},{n:'搜狗',fn:q=>'https://www.sogou.com/web?query='+encodeURIComponent(q)}];
+const APP_VERSION='v1.3.6F',USER_KEY='sg_user_config_v3',BACKUP_TYPE='CATCAT_NAV_BACKUP',MAX_CUSTOM_CATS=50,MAX_CUSTOM_SITES=500,MAX_LOCAL_IMAGE=1.2*1024*1024;
+
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const normalize=s=>String(s??'').trim().normalize('NFKC').toLowerCase();
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const cleanText=(s,max)=>Array.from(String(s??'').trim()).slice(0,max).join('');
+const safeUrl=u=>{try{const x=new URL(String(u??'').trim());return (x.protocol==='http:'||x.protocol==='https:')?x.href:''}catch{return''}};
+const safeImageSrc=u=>{const s=String(u??'').trim();if(/^data:image\/(?:png|jpeg|webp|gif|avif);base64,/i.test(s))return s;return safeUrl(s)};
+const host=u=>{try{return new URL(safeUrl(u)).hostname}catch{return''}};
+const clone=o=>JSON.parse(JSON.stringify(o));
+const clamp=(n,min,max)=>Math.min(max,Math.max(min,Number(n)||min));
+const uid=()=>{try{return crypto.randomUUID()}catch{return 'u'+Date.now().toString(36)+Math.random().toString(36).slice(2)}};
+const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)};
+const defaultSiteId=s=>'d-'+hash(s.c+'\n'+s.n+'\n'+s.u);
+const defaultCatRef=name=>'d:'+name,customCatRef=id=>'u:'+id;
+const defaultCatNames=new Set(DEFAULT_CATS.map(c=>c.k));
+const defaultSiteIds=new Set(DEFAULT_SITES.map(defaultSiteId));
+
+const ls={g(k,d){try{const v=localStorage.getItem('sg_'+k);return v!==null?v:d}catch{return d}},s(k,v){try{localStorage.setItem('sg_'+k,String(v));return true}catch{return false}}};
+const _theme=ls.g('theme','auto'),_accent=ls.g('accent','gold'),_eng=Number.parseInt(ls.g('eng','0'),10);
+const P={theme:['auto','dark','light'].includes(_theme)?_theme:'auto',accent:['gold','blue','green','rose','violet','teal','orange','sky'].includes(_accent)?_accent:'gold',eng:Number.isInteger(_eng)&&_eng>=0&&_eng<ENGS.length?_eng:0};
+const EMPTY_USER={schema:3,nav:{mode:'extend',customCats:[],customSites:[],hiddenDefaultCats:[],hiddenDefaultSites:[]},hero:{source:'default',url:'',localData:'',localName:'',ratio:'16:9',width:380,height:214,frameStyle:true,offExplicit:false}};
+
+function sanitizeUserState(raw){
+  const out=clone(EMPTY_USER),r=raw&&typeof raw==='object'?raw:{};
+  const nav=r.nav&&typeof r.nav==='object'?r.nav:{};
+  out.nav.mode=nav.mode==='custom'?'custom':'extend';
+  const seenIds=new Set(),seenNames=new Set();
+  if(Array.isArray(nav.customCats))for(const c of nav.customCats.slice(0,MAX_CUSTOM_CATS)){
+    let id=String(c?.id||'').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,80);if(!id||seenIds.has(id))id=uid().replace(/[^a-zA-Z0-9_-]/g,'');
+    const name=cleanText(c?.name,20),icon=cleanText(c?.icon||'📁',4)||'📁',nn=normalize(name);
+    if(!name||seenNames.has(nn)||defaultCatNames.has(name))continue;seenIds.add(id);seenNames.add(nn);out.nav.customCats.push({id,name,icon});
+  }
+  const validUserRefs=new Set(out.nav.customCats.map(c=>customCatRef(c.id))),validDefaultRefs=new Set(DEFAULT_CATS.map(c=>defaultCatRef(c.k)));
+  const siteIds=new Set();
+  if(Array.isArray(nav.customSites))for(const s of nav.customSites.slice(0,MAX_CUSTOM_SITES)){
+    let id=String(s?.id||'').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,80);if(!id||siteIds.has(id))id=uid().replace(/[^a-zA-Z0-9_-]/g,'');
+    const n=cleanText(s?.n,40),u=safeUrl(s?.u),catRef=String(s?.catRef||'');
+    if(!n||!u||(!validUserRefs.has(catRef)&&!validDefaultRefs.has(catRef)))continue;siteIds.add(id);out.nav.customSites.push({id,catRef,n,u});
+  }
+  if(Array.isArray(nav.hiddenDefaultCats))out.nav.hiddenDefaultCats=[...new Set(nav.hiddenDefaultCats.map(v=>String(v)).filter(v=>defaultCatNames.has(v)))];
+  if(Array.isArray(nav.hiddenDefaultSites))out.nav.hiddenDefaultSites=[...new Set(nav.hiddenDefaultSites.map(v=>String(v)).filter(v=>defaultSiteIds.has(v)))];
+  const hero=r.hero&&typeof r.hero==='object'?r.hero:{};
+  out.hero.source=['default','url','local','off'].includes(hero.source)?hero.source:'default';
+  out.hero.url=safeUrl(hero.url);
+  const local=String(hero.localData||'');out.hero.localData=local.length<=Math.ceil(MAX_LOCAL_IMAGE*1.45)&&/^data:image\/(?:png|jpeg|webp|gif|avif);base64,/i.test(local)?local:'';
+  out.hero.localName=cleanText(hero.localName,80);
+  out.hero.ratio=['16:9','4:3','1:1','max','custom'].includes(hero.ratio)?hero.ratio:'16:9';
+  out.hero.width=clamp(hero.width,220,420);out.hero.height=clamp(hero.height,140,320);out.hero.frameStyle=hero.frameStyle!==false;out.hero.offExplicit=hero.offExplicit===true;if(out.hero.source==='off'&&!out.hero.offExplicit)out.hero.source='default';
+  return out;
+}
+function loadUserState(){try{return sanitizeUserState(JSON.parse(localStorage.getItem(USER_KEY)||'{}'))}catch{return clone(EMPTY_USER)}}
+let U=loadUserState();
+function saveUserState(){try{localStorage.setItem(USER_KEY,JSON.stringify(U));return true}catch(e){alert('浏览器本地存储空间不足，当前修改未保存。若使用了本地 Hero 图片，可尝试换用更小的图片或图片链接。');return false}}
+function commitUser(mutator,{nav=false,hero=false,manager=false}={}){const before=clone(U);mutator(U);U=sanitizeUserState(U);if(!saveUserState()){U=before;return false}if(nav)renderNavigation();if(hero){applyHeroMedia();syncHeroSettings()}syncNavModeButtons();if(manager&&isNavManagerOpen())renderManager();updateBackupStats();return true}
+
+function getEffectiveConfig(){
+  const cats=[],sites=[],hiddenCats=new Set(U.nav.hiddenDefaultCats),hiddenSites=new Set(U.nav.hiddenDefaultSites);
+  if(U.nav.mode==='extend')for(const c of DEFAULT_CATS)if(!hiddenCats.has(c.k))cats.push({ref:defaultCatRef(c.k),k:c.k,i:c.i,origin:'default'});
+  for(const c of U.nav.customCats)cats.push({ref:customCatRef(c.id),k:c.name,i:c.icon||'📁',origin:'user',id:c.id});
+  const refs=new Set(cats.map(c=>c.ref));
+  if(U.nav.mode==='extend')for(const s of DEFAULT_SITES){const ref=defaultCatRef(s.c),id=defaultSiteId(s);if(refs.has(ref)&&!hiddenSites.has(id))sites.push({id,catRef:ref,n:s.n,u:s.u,origin:'default'})}
+  for(const s of U.nav.customSites)if(refs.has(s.catRef))sites.push({...s,origin:'user'});
+  return {cats,sites};
+}
+
+function resolveTheme(t){return t==='auto'?(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'):t}
+document.documentElement.dataset.theme=resolveTheme(P.theme);document.documentElement.dataset.accent=P.accent;
+function updateThemeColor(){$('#themeColor').content=resolveTheme(P.theme)==='dark'?'#0e0c0a':'#f5f0e6'}updateThemeColor();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(P.theme==='auto'){document.documentElement.dataset.theme=resolveTheme('auto');updateThemeColor()}});
+
+/* ═══════ FAVICON / SKELETON ═══════ */
+const FAV_KEY='sg_favcache';let _favCache=null,_favDirty=false,_favTimer=null;
+function favCache(){if(_favCache!==null)return _favCache;try{const r=localStorage.getItem(FAV_KEY);_favCache=r?JSON.parse(r):{}}catch{_favCache={}}return _favCache}
+function favCacheSet(domain,url){if(favCache()[domain]===url)return;favCache()[domain]=url;_favDirty=true;clearTimeout(_favTimer);_favTimer=setTimeout(()=>{if(_favDirty){try{localStorage.setItem(FAV_KEY,JSON.stringify(favCache()))}catch{}}_favDirty=false},300)}
+function favSrcs(h){return['https://favicon.im/'+h,'https://icons.duckduckgo.com/ip3/'+h+'.ico','https://www.google.com/s2/favicons?domain='+h+'&sz=32']}
+function attemptLoad(icon,img,hostname,srcs,idx){if(idx>=srcs.length){icon.classList.remove('loading');return}icon.classList.add('loading');img.onload=function(){this.classList.add('ok');icon.classList.remove('loading');favCacheSet(hostname,srcs[idx])};img.onerror=function(){attemptLoad(icon,img,hostname,srcs,idx+1)};img.src=srcs[idx]}
+function loadFavicon(cardEl){const icon=cardEl.querySelector('.card-icon');if(!icon||icon.dataset.loaded)return;icon.dataset.loaded='1';const img=icon.querySelector('.favicon'),h=cardEl.dataset.host;if(!h){icon.classList.remove('loading');return}const cached=favCache()[h];if(cached){img.onload=function(){this.classList.add('ok');icon.classList.remove('loading')};img.onerror=function(){try{delete favCache()[h];localStorage.setItem(FAV_KEY,JSON.stringify(favCache()))}catch{};attemptLoad(icon,img,h,favSrcs(h),0)};img.src=cached;return}attemptLoad(icon,img,h,favSrcs(h),0)}
+const favObs=('IntersectionObserver' in window)?new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){loadFavicon(en.target);favObs.unobserve(en.target)}})},{rootMargin:'200px'}):null;
+
+/* ═══════ DOM / NAV RENDER ═══════ */
+const sb=$('#sbNav'),mt=$('#mTabsIn'),ct=$('#content'),_mTabs=$('#mTabs');
+const sInput=$('#sInput'),sClear=$('#sClear'),sCount=$('#sCount'),sHint=$('#sHint'),sEmpty=$('#sEmpty'),sEngName=$('#sEngName'),sEngQ=$('#sEngQ');
+let _cards=[],_secs=[],_sbLinks=[],_mtLinks=[],_lastActive=-1;
+function renderNavigation(){
+  const cfg=getEffectiveConfig(),groups=new Map(cfg.cats.map(c=>[c.ref,[]]));cfg.sites.forEach(s=>{if(groups.has(s.catRef))groups.get(s.catRef).push(s)});
+  sb.innerHTML='';mt.innerHTML='';ct.innerHTML='';
+  if(!cfg.cats.length){ct.innerHTML='<div class="empty-nav"><b>当前没有分类</b><p>你正在使用完全自定义模式，但还没有创建分类。先创建一个分类，再添加自己常用的网站。</p><button type="button" id="emptyManageBtn">打开导航管理</button></div>';$('#emptyManageBtn')?.addEventListener('click',openNavManager);_cards=[];_secs=[];_sbLinks=[];_mtLinks=[];_lastActive=-1;return}
+  const sf=document.createDocumentFragment(),mf=document.createDocumentFragment(),cf=document.createDocumentFragment();
+  cfg.cats.forEach((m,i)=>{
+    const list=groups.get(m.ref)||[];
+    const a=document.createElement('a');a.href='#sec-'+i;a.dataset.i=i;a.innerHTML='<span class="sb-ic" aria-hidden="true">'+esc(m.i)+'</span>'+esc(m.k)+'<span class="sb-ct">'+list.length+'</span>';sf.appendChild(a);
+    const ma=document.createElement('a');ma.href='#sec-'+i;ma.dataset.i=i;ma.textContent=m.i+' '+m.k;mf.appendChild(ma);
+    const sec=document.createElement('section');sec.className='cat-sec';sec.id='sec-'+i;let html='<div class="cat-hd"><span class="cat-icon" aria-hidden="true">'+esc(m.i)+'</span><h2 class="cat-name">'+esc(m.k)+'</h2><span class="cat-line"></span><span class="cat-ct">'+list.length+'</span></div><div class="card-grid">';
+    list.forEach(s=>{const u=safeUrl(s.u),h=host(u);if(!u)return;html+='<a class="site-card" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer" data-q="'+esc(normalize(s.n))+'" data-cat="'+esc(normalize(m.k))+'" data-host="'+esc(normalize(h))+'" data-si="'+i+'"><div class="card-icon loading"><span class="emoji" aria-hidden="true">'+esc(m.i||'🔗')+'</span><img class="favicon" alt="" width="20" height="20" decoding="async" referrerpolicy="no-referrer"></div><span class="card-name">'+esc(s.n)+'</span></a>'});
+    sec.innerHTML=html+'</div>';cf.appendChild(sec);
+  });
+  sb.appendChild(sf);mt.appendChild(mf);ct.appendChild(cf);
+  _cards=$$('.site-card');_secs=$$('.cat-sec');_sbLinks=Array.from(sb.querySelectorAll('a'));_mtLinks=Array.from(mt.querySelectorAll('a'));_lastActive=-1;
+  _sbLinks.forEach(a=>a.addEventListener('click',navClick));_mtLinks.forEach(a=>a.addEventListener('click',navClick));
+  if(favObs)_cards.forEach(c=>favObs.observe(c));else _cards.forEach(loadFavicon);
+  doFilter();requestAnimationFrame(()=>{updateTabEdge();setActiveNav(findActive())});
+}
+function updateTabEdge(){const el=_mTabs,sl=el.scrollLeft,cw=el.clientWidth,sw=el.scrollWidth;el.classList.toggle('at-start',sl<4);el.classList.toggle('at-end',sl+cw>=sw-4)}
+_mTabs.addEventListener('scroll',updateTabEdge,{passive:true});
+
+/* ═══════ SEARCH ═══════ */
+const engsWrap=$('#engs'),spE=$('#spEng');
+ENGS.forEach((e,i)=>{const b=document.createElement('button');b.type='button';b.className='eng-btn'+(i===P.eng?' on':'');b.textContent=e.n;b.dataset.i=i;b.setAttribute('aria-pressed',i===P.eng?'true':'false');b.addEventListener('click',()=>setEng(i));engsWrap.appendChild(b)});
+ENGS.forEach((e,i)=>{const b=document.createElement('button');b.type='button';b.className='sp-opt'+(i===P.eng?' on':'');b.textContent=e.n;b.dataset.i=i;b.setAttribute('aria-pressed',i===P.eng?'true':'false');b.addEventListener('click',()=>setEng(i));spE.appendChild(b)});
+function updateHint(){const en=ENGS[P.eng].n;sHint.innerHTML='💡 输入<em>网站名称</em>实时筛选 · 按回车用 <span>'+en+'</span> 搜索网页 · 按 <span>/</span> 快速聚焦';sInput.placeholder='搜索网站名称，回车用'+en+'搜索...';sEngName.textContent=en}updateHint();
+function doFilter(){const q=normalize(sInput.value);sClear.classList.toggle('show',q.length>0);let total=0;const secCnt=new Array(_secs.length).fill(0);for(let i=0;i<_cards.length;i++){const m=!q||_cards[i].dataset.q.includes(q)||_cards[i].dataset.cat.includes(q)||_cards[i].dataset.host.includes(q);_cards[i].classList.toggle('hide',!m);if(m){total++;secCnt[+_cards[i].dataset.si]++}}for(let i=0;i<_secs.length;i++){const visible=secCnt[i]>0;_secs[i].style.display=visible?'':'none';const hideNav=!!q&&!visible;if(_sbLinks[i])_sbLinks[i].classList.toggle('search-hidden',hideNav);if(_mtLinks[i])_mtLinks[i].classList.toggle('search-hidden',hideNav)}requestAnimationFrame(updateTabEdge);if(q){sCount.textContent=total>0?'找到 '+total+' 个匹配站点':'未找到匹配站点';sCount.classList.add('show');if(total===0){sEngQ.textContent=sInput.value.trim();sEmpty.classList.add('show')}else sEmpty.classList.remove('show')}else{sCount.classList.remove('show');sEmpty.classList.remove('show')}requestAnimationFrame(()=>{if(_lastActive>=0&&_secs[_lastActive]&&_secs[_lastActive].style.display==='none')setActiveNav(findActive());if(favObs)_cards.forEach(c=>{const icon=c.querySelector('.card-icon');if(!c.classList.contains('hide')&&icon&&!icon.dataset.loaded)favObs.observe(c)})})}
+let searchTimer,_isComposing=false;sInput.addEventListener('compositionstart',()=>{_isComposing=true});sInput.addEventListener('compositionend',()=>{_isComposing=false;doFilter()});sInput.addEventListener('input',()=>{if(_isComposing)return;clearTimeout(searchTimer);searchTimer=setTimeout(doFilter,100)});sClear.addEventListener('click',()=>{sInput.value='';doFilter();sInput.focus()});sInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&!_isComposing){e.preventDefault();const q=sInput.value.trim();if(q)window.open(ENGS[P.eng].fn(q),'_blank','noopener,noreferrer')}});
+function setEng(i){if(!Number.isInteger(i)||i<0||i>=ENGS.length)return;P.eng=i;ls.s('eng',i);engsWrap.querySelectorAll('.eng-btn').forEach((b,j)=>{const on=j===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});spE.querySelectorAll('.sp-opt').forEach((b,j)=>{const on=j===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});updateHint();doFilter();updateBackupStats()}
+
+/* ═══════ SCROLL ═══════ */
+const btt=$('#btt'),reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');const scrollBehavior=()=>reducedMotion.matches?'auto':'smooth';let scrollTick=false,_lastBtt=false,_scrollLock=0,_scrollLockTmr;
+function findActive(){const anchor=innerWidth<=1024?86:72;let active=-1;for(let i=0;i<_secs.length;i++){const sec=_secs[i];if(sec.style.display==='none')continue;const top=sec.getBoundingClientRect().top;if(active<0)active=i;if(top<=anchor)active=i;else break}return active<0?0:active}
+function setActiveNav(active){if(active===_lastActive)return;if(_lastActive>=0){if(_sbLinks[_lastActive]){_sbLinks[_lastActive].classList.remove('on');_sbLinks[_lastActive].removeAttribute('aria-current')}if(_mtLinks[_lastActive]){_mtLinks[_lastActive].classList.remove('on');_mtLinks[_lastActive].removeAttribute('aria-current')}}_lastActive=active;if(_sbLinks[active]){_sbLinks[active].classList.add('on');_sbLinks[active].setAttribute('aria-current','location')}if(_mtLinks[active]){_mtLinks[active].classList.add('on');_mtLinks[active].setAttribute('aria-current','location');const tab=_mtLinks[active],cont=mt,tl=tab.offsetLeft-cont.scrollLeft,tr=tl+tab.offsetWidth,cw=cont.clientWidth;if(tl<0||tr>cw)cont.scrollLeft=tab.offsetLeft-cw/2+tab.offsetWidth/2}}
+function onScroll(){const y=scrollY,show=y>400;if(show!==_lastBtt){_lastBtt=show;btt.classList.toggle('show',show)}if(!_scrollLock&&_secs.length)setActiveNav(findActive());scrollTick=false}addEventListener('scroll',()=>{if(!scrollTick){scrollTick=true;requestAnimationFrame(onScroll)}},{passive:true});btt.addEventListener('click',()=>{_scrollLock=1;clearTimeout(_scrollLockTmr);_scrollLockTmr=setTimeout(()=>{_scrollLock=0},600);scrollTo({top:0,behavior:scrollBehavior()})});
+function navClick(e){e.preventDefault();const idx=+this.dataset.i,sec=_secs[idx];if(!sec||sec.style.display==='none')return;setActiveNav(idx);_scrollLock=1;clearTimeout(_scrollLockTmr);_scrollLockTmr=setTimeout(()=>{_scrollLock=0;setActiveNav(findActive())},700);sec.scrollIntoView({block:'start',behavior:scrollBehavior()})}
+
+/* ═══════ HERO MEDIA ═══════ */
+const heroInner=$('#heroInner'),heroMedia=$('#heroMedia'),heroFrame=$('#heroMediaFrame'),heroImg=$('#heroMediaImg'),heroBadge=$('#heroMediaBadge');
+const heroSource=$('#heroSource'),heroUrl=$('#heroUrl'),heroUrlField=$('#heroUrlField'),heroUrlApply=$('#heroUrlApply'),heroFileBtn=$('#heroFileBtn'),heroFile=$('#heroFile'),heroFileName=$('#heroFileName'),heroFrameStyle=$('#heroFrameStyle'),heroRatioTog=$('#heroRatioTog'),heroCustomSize=$('#heroCustomSize'),heroWidth=$('#heroWidth'),heroHeight=$('#heroHeight'),heroMediaError=$('#heroMediaError');
+function resolvedHero(){const h=U.hero;if(h.source==='off')return {src:'',label:'隐藏',...h};if(h.source==='url')return {src:safeUrl(h.url),label:'自定义链接',...h};if(h.source==='local'){const localSrc=safeImageSrc(h.localData);if(localSrc)return {src:localSrc,label:'本地图片',...h};return {src:safeUrl(DEFAULT_HERO_MEDIA.src),label:'等待选择本地图片',source:'local',ratio:h.ratio||DEFAULT_HERO_MEDIA.ratio||'16:9',width:h.width||DEFAULT_HERO_MEDIA.width||380,height:h.height||DEFAULT_HERO_MEDIA.height||214,alt:DEFAULT_HERO_MEDIA.alt||'展示图'}}return {src:safeUrl(DEFAULT_HERO_MEDIA.src),label:'云端默认',source:'default',ratio:h.ratio||DEFAULT_HERO_MEDIA.ratio||'16:9',width:h.width||DEFAULT_HERO_MEDIA.width||380,height:h.height||DEFAULT_HERO_MEDIA.height||214,alt:DEFAULT_HERO_MEDIA.alt||'展示图'}}
+/* HTTPS 页面无法可靠加载 HTTP 图片；运行时仅尝试 HTTPS 等价地址，失败统一按“临时隐藏”处理。 */
+function runtimeImageSrc(src){const clean=safeImageSrc(src);if(!clean||clean.startsWith('data:'))return clean;if(location.protocol==='https:'&&clean.startsWith('http://'))return 'https://'+clean.slice(7);return clean}
+const HERO_MAX_W=560,HERO_MAX_H=320,HERO_MOBILE_MAX_H=230,HERO_DEFAULT_LOAD_TIMEOUT=10000,HERO_RETRY_DELAYS=[30000,120000,300000];
+let _heroAppliedSrc='',_heroLoadSeq=0,_heroLoadTimer=null,_heroRetryTimer=null,_heroRetryAttempt=0;
+function heroMaxHeight(){return matchMedia('(max-width:768px)').matches?HERO_MOBILE_MAX_H:HERO_MAX_H}
+function heroRatioNumber(r){if(r==='16:9')return 16/9;if(r==='4:3')return 4/3;if(r==='1:1')return 1;return 0}
+function applyHeroGeometry(h){const ratio=h.ratio||'16:9',isCustom=ratio==='custom',isMax=ratio==='max',maxH=heroMaxHeight(),w=clamp(h.width,220,420),ht=clamp(h.height,140,320);heroMedia.classList.toggle('max-ratio',isMax);heroMedia.dataset.ratio=ratio;heroFrame.style.width='100%';heroFrame.style.height='';heroFrame.style.maxWidth=HERO_MAX_W+'px';if(isMax){heroFrame.style.aspectRatio='auto';return}const r=isCustom?w/ht:heroRatioNumber(ratio)||16/9;const requestedW=isCustom?w:HERO_MAX_W;const safeW=Math.min(HERO_MAX_W,requestedW,maxH*r);heroFrame.style.maxWidth=Math.max(1,safeW)+'px';heroFrame.style.aspectRatio=isCustom?(w+' / '+ht):ratio.replace(':',' / ')}
+function clearHeroLoadTimer(){if(_heroLoadTimer!==null){clearTimeout(_heroLoadTimer);_heroLoadTimer=null}}
+function cancelDefaultHeroRetryTimer(){if(_heroRetryTimer!==null){clearTimeout(_heroRetryTimer);_heroRetryTimer=null}}
+function resetDefaultHeroRetry(){cancelDefaultHeroRetryTimer();_heroRetryAttempt=0}
+function collapseHeroVisual(){heroMedia.hidden=true;heroInner.classList.add('no-media');heroMedia.classList.remove('max-ratio');delete heroMedia.dataset.ratio;heroFrame.classList.remove('loaded','error')}
+function hideHeroRuntime(){clearHeroLoadTimer();_heroLoadSeq++;collapseHeroVisual();heroImg.onload=null;heroImg.onerror=null;heroImg.removeAttribute('src');_heroAppliedSrc='';heroFrame.classList.remove('loading')}
+function scheduleDefaultHeroRetry(){cancelDefaultHeroRetryTimer();if(U.hero.source!=='default')return;const delay=HERO_RETRY_DELAYS[Math.min(_heroRetryAttempt,HERO_RETRY_DELAYS.length-1)];_heroRetryAttempt++;_heroRetryTimer=setTimeout(()=>{_heroRetryTimer=null;if(U.hero.source!=='default')return;if(document.hidden){scheduleDefaultHeroRetry();return}applyHeroMedia({forceDefault:true})},delay)}
+function defaultHeroUnavailable({abort=false}={}){
+  if(U.hero.source!=='default')return;
+  /* 运行时故障与用户偏好彻底分离：超时只收起界面，不中断仍可能成功的请求。 */
+  heroMediaError.textContent='';
+  if(abort)hideHeroRuntime();else collapseHeroVisual();
+  scheduleDefaultHeroRetry();
+}
+function applyHeroMedia({forceDefault=false}={}){
+  const h=resolvedHero(),originalSrc=safeImageSrc(h.src),src=runtimeImageSrc(originalSrc);
+  heroFrame.classList.toggle('bare',U.hero.frameStyle===false);
+  if(!src){hideHeroRuntime();return}
+  if(h.source!=='default')cancelDefaultHeroRetryTimer();
+  if(forceDefault&&h.source==='default')cancelDefaultHeroRetryTimer();
+  heroInner.classList.remove('no-media');heroMedia.hidden=false;applyHeroGeometry(h);heroBadge.textContent=h.label;heroImg.alt=h.alt||'Hero 展示图';
+  /* 默认云端图失败时不展示错误容器；只有用户自定义来源才显示可见错误提示。 */
+  heroMediaError.textContent=h.source==='default'?'':'展示图加载失败，请在设置中检查图片地址或重新选择本地图片。';
+  if(_heroAppliedSrc===src&&heroImg.getAttribute('src')&&heroFrame.classList.contains('loaded'))return;
+  clearHeroLoadTimer();
+  const loadSeq=++_heroLoadSeq;
+  _heroAppliedSrc=src;
+  heroImg.onload=null;heroImg.onerror=null;heroImg.removeAttribute('src');
+  heroFrame.classList.remove('loaded','error');heroFrame.classList.add('loading');
+  heroImg.onload=()=>{
+    if(loadSeq!==_heroLoadSeq)return;
+    clearHeroLoadTimer();
+    if(h.source==='default')resetDefaultHeroRetry();
+    heroFrame.classList.remove('loading','error');heroFrame.classList.add('loaded');
+    heroInner.classList.remove('no-media');heroMedia.hidden=false;
+  };
+  heroImg.onerror=()=>{
+    if(loadSeq!==_heroLoadSeq)return;
+    clearHeroLoadTimer();
+    if(h.source==='default'&&U.hero.source==='default'){defaultHeroUnavailable({abort:true});return}
+    heroFrame.classList.remove('loading','loaded');heroFrame.classList.add('error');
+  };
+  if(h.source==='default')_heroLoadTimer=setTimeout(()=>{
+    if(loadSeq===_heroLoadSeq&&U.hero.source==='default')defaultHeroUnavailable({abort:false});
+  },HERO_DEFAULT_LOAD_TIMEOUT);
+  heroImg.src=src;
+}
+let _heroResizeTimer;addEventListener('resize',()=>{clearTimeout(_heroResizeTimer);_heroResizeTimer=setTimeout(()=>{if(!heroMedia.hidden)applyHeroGeometry(resolvedHero())},120)},{passive:true});
+function syncHeroSettings(){heroSource.value=U.hero.source;heroUrl.value=U.hero.url||'';heroFileName.textContent=U.hero.localName|| (U.hero.localData?'已保存本地图片':'尚未选择图片');heroUrlField.style.display=U.hero.source==='url'?'block':'none';heroUrlApply.style.display=U.hero.source==='url'?'block':'none';heroFileBtn.style.display=U.hero.source==='local'?'inline-flex':'none';heroFileName.parentElement.style.display=U.hero.source==='local'?'flex':'none';heroFileBtn.textContent=U.hero.localData?'更换本地图片':'选择本地图片';const frameOn=U.hero.frameStyle!==false;heroFrameStyle.classList.toggle('on',frameOn);heroFrameStyle.setAttribute('aria-checked',frameOn?'true':'false');heroRatioTog.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.ratio===U.hero.ratio));heroCustomSize.style.display=U.hero.ratio==='custom'?'grid':'none';heroWidth.value=U.hero.width;heroHeight.value=U.hero.height}
+heroSource.addEventListener('change',()=>{const next=heroSource.value,needPick=next==='local'&&!U.hero.localData;if(next==='default')resetDefaultHeroRetry();else cancelDefaultHeroRetryTimer();if(commitUser(u=>{u.hero.source=next;u.hero.offExplicit=next==='off'},{hero:true})&&needPick)setTimeout(()=>heroFile.click(),0)});heroFrameStyle.addEventListener('click',()=>commitUser(u=>{u.hero.frameStyle=u.hero.frameStyle===false},{hero:true}));heroUrlApply.addEventListener('click',()=>{const url=safeUrl(heroUrl.value);if(!url){alert('请输入有效的 HTTP 或 HTTPS 图片地址。');return}commitUser(u=>{u.hero.url=url;u.hero.source='url';u.hero.offExplicit=false},{hero:true})});heroFileBtn.addEventListener('click',()=>heroFile.click());
+function imageDimensions(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve({w:im.naturalWidth,h:im.naturalHeight});im.onerror=reject;im.src=src})}
+heroFile.addEventListener('change',async()=>{const file=heroFile.files&&heroFile.files[0];heroFile.value='';if(!file)return;if(!['image/png','image/jpeg','image/webp','image/gif','image/avif'].includes(file.type)){alert('请选择 PNG、JPG、WebP、GIF 或 AVIF 图片。');return}if(file.size>MAX_LOCAL_IMAGE){alert('本地图片不能超过 1.2 MB。建议压缩后重试，或使用图片链接。');return}const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result||''));r.onerror=reject;r.readAsDataURL(file)}).catch(()=>null);if(!data)return;const dim=await imageDimensions(data).catch(()=>null);if(!dim||dim.w>6000||dim.h>6000){alert('图片无法读取或尺寸超过 6000×6000。');return}commitUser(u=>{u.hero.localData=data;u.hero.localName=file.name;u.hero.source='local';u.hero.offExplicit=false},{hero:true})});
+heroRatioTog.addEventListener('click',e=>{const b=e.target.closest('[data-ratio]');if(!b)return;commitUser(u=>{u.hero.ratio=b.dataset.ratio},{hero:true})});
+function saveHeroSize(){commitUser(u=>{u.hero.width=clamp(heroWidth.value,220,420);u.hero.height=clamp(heroHeight.value,140,320)},{hero:true})}heroWidth.addEventListener('change',saveHeroSize);heroHeight.addEventListener('change',saveHeroSize);$('#heroReset').addEventListener('click',()=>{resetDefaultHeroRetry();const ok=commitUser(u=>{u.hero=clone(EMPTY_USER.hero)},{hero:true});if(ok&&U.hero.source==='default'&&heroMedia.hidden)applyHeroMedia({forceDefault:true})});
+
+/* ═══════ NAV MANAGER ═══════ */
+const mgrO=$('#navMgrOverlay'),mgrM=$('#navMgrModal'),mgrClose=$('#navMgrClose'),mgrCatList=$('#mgrCatList'),mgrSiteList=$('#mgrSiteList'),mgrSiteSearch=$('#mgrSiteSearch');let mgrLastFocus=null,mgrSelectedRef='';
+function isNavManagerOpen(){return mgrM.classList.contains('open')}
+function openNavManager(){closeSP();closeBackup();mgrLastFocus=document.activeElement;mgrO.removeAttribute('inert');mgrO.setAttribute('aria-hidden','false');mgrO.classList.add('open');mgrM.classList.add('open');document.body.classList.add('dialog-open');renderManager();setTimeout(()=>mgrClose.focus(),60)}
+function closeNavManager(){if(!isNavManagerOpen())return;mgrO.classList.remove('open');mgrM.classList.remove('open');mgrO.setAttribute('aria-hidden','true');mgrO.setAttribute('inert','');document.body.classList.remove('dialog-open');const f=mgrLastFocus;mgrLastFocus=null;if(f&&f.isConnected)f.focus()}
+function setNavMode(mode){if(!['extend','custom'].includes(mode)||mode===U.nav.mode)return;commitUser(u=>{u.nav.mode=mode},{nav:true,manager:true});mgrSelectedRef='';renderManager()}
+function syncNavModeButtons(){$$('[data-mode]').forEach(b=>{if(!b.closest('#navModeTog')&&!b.closest('#mgrModeSwitch'))return;const on=b.dataset.mode===U.nav.mode;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')})}
+function renderManager(){const cfg=getEffectiveConfig(),countMap=new Map(cfg.cats.map(c=>[c.ref,0]));cfg.sites.forEach(s=>countMap.set(s.catRef,(countMap.get(s.catRef)||0)+1));if(!cfg.cats.some(c=>c.ref===mgrSelectedRef))mgrSelectedRef=cfg.cats[0]?.ref||'';mgrCatList.innerHTML='';$('#mgrCatCount').textContent=cfg.cats.length+' 个';for(const c of cfg.cats){const row=document.createElement('div');row.className='mgr-cat'+(c.ref===mgrSelectedRef?' on':'');const main=document.createElement('button');main.type='button';main.className='mgr-cat-main';const ic=document.createElement('span');ic.textContent=c.i;const nm=document.createElement('span');nm.textContent=c.k;const ct=document.createElement('small');ct.textContent=countMap.get(c.ref)||0;main.append(ic,nm,ct);main.addEventListener('click',()=>{mgrSelectedRef=c.ref;renderManager()});const del=document.createElement('button');del.type='button';del.className='mgr-del';del.title=c.origin==='default'?'在本浏览器隐藏此默认分类':'删除自定义分类';del.setAttribute('aria-label',del.title);del.textContent='×';del.addEventListener('click',()=>deleteCategory(c));row.append(main,del);mgrCatList.appendChild(row)}const hiddenN=U.nav.hiddenDefaultCats.length+U.nav.hiddenDefaultSites.length;$('#mgrHiddenInfo').textContent=U.nav.mode==='extend'?'已隐藏默认项 '+hiddenN+' 个':'完全自定义模式';$('#restoreDefaultsBtn').disabled=!hiddenN;const cur=cfg.cats.find(c=>c.ref===mgrSelectedRef),current=$('#mgrCurrentCat');current.innerHTML='';if(cur){const i=document.createElement('span');i.textContent=cur.i;const n=document.createElement('span');n.className='mgr-current-name';n.textContent=cur.k;const badge=document.createElement('span');badge.className='mgr-origin '+(cur.origin==='user'?'user':'');badge.textContent=cur.origin==='user'?'本地':'默认';current.append(i,n,badge)}else current.textContent='请先创建分类';$('#addSiteRow').style.display=cur?'grid':'none';mgrSiteSearch.style.display=cur?'block':'none';const q=normalize(mgrSiteSearch.value),items=cur?cfg.sites.filter(s=>s.catRef===cur.ref&&(!q||normalize(s.n).includes(q)||normalize(host(s.u)).includes(q))):[];$('#mgrSiteCount').textContent=cur?(cfg.sites.filter(s=>s.catRef===cur.ref).length+' 个网站'):'';mgrSiteList.innerHTML='';if(!cur){mgrSiteList.innerHTML='<div class="data-empty">先在左侧创建一个分类。</div>';return}if(!items.length){mgrSiteList.innerHTML='<div class="data-empty">当前分类没有匹配的网站。</div>';return}for(const s of items){const row=document.createElement('div');row.className='mgr-site';const info=document.createElement('div'),name=document.createElement('div'),domain=document.createElement('div');name.className='mgr-site-name';name.textContent=s.n;domain.className='mgr-site-domain';domain.textContent=host(s.u)+(s.origin==='user'?' · 本地自定义':' · 默认配置');info.append(name,domain);const del=document.createElement('button');del.type='button';del.className='mgr-del';del.textContent='×';del.title=s.origin==='default'?'在本浏览器隐藏此默认网站':'删除自定义网站';del.setAttribute('aria-label',del.title);del.addEventListener('click',()=>deleteSite(s));row.append(info,del);mgrSiteList.appendChild(row)}}
+function deleteCategory(c){if(c.origin==='default'){if(!confirm('隐藏默认分类“'+c.k+'”？这只影响当前浏览器，可随时恢复。'))return;commitUser(u=>{if(!u.nav.hiddenDefaultCats.includes(c.k))u.nav.hiddenDefaultCats.push(c.k)},{nav:true,manager:true})}else{if(!confirm('删除自定义分类“'+c.k+'”及其中的自定义网站？'))return;commitUser(u=>{u.nav.customCats=u.nav.customCats.filter(x=>x.id!==c.id);u.nav.customSites=u.nav.customSites.filter(x=>x.catRef!==c.ref)},{nav:true,manager:true})}}
+function deleteSite(s){if(s.origin==='default')commitUser(u=>{if(!u.nav.hiddenDefaultSites.includes(s.id))u.nav.hiddenDefaultSites.push(s.id)},{nav:true,manager:true});else commitUser(u=>{u.nav.customSites=u.nav.customSites.filter(x=>x.id!==s.id)},{nav:true,manager:true})}
+$('#addCatBtn').addEventListener('click',()=>{const name=cleanText($('#newCatName').value,20),icon=cleanText($('#newCatIcon').value,4)||'📁';if(!name){alert('请输入分类名称。');return}if(U.nav.customCats.length>=MAX_CUSTOM_CATS){alert('最多可创建 '+MAX_CUSTOM_CATS+' 个自定义分类。');return}if(DEFAULT_CATS.some(c=>normalize(c.k)===normalize(name))||U.nav.customCats.some(c=>normalize(c.name)===normalize(name))){alert('分类名称已存在。');return}const id=uid().replace(/[^a-zA-Z0-9_-]/g,'');if(commitUser(u=>u.nav.customCats.push({id,name,icon}),{nav:true,manager:true})){$('#newCatName').value='';mgrSelectedRef=customCatRef(id);renderManager()}});
+$('#addSiteBtn').addEventListener('click',()=>{const n=cleanText($('#newSiteName').value,40),u=safeUrl($('#newSiteUrl').value);if(!mgrSelectedRef){alert('请先选择分类。');return}if(!n||!u){alert('请填写网站名称和有效的 HTTP / HTTPS 链接。');return}if(U.nav.customSites.length>=MAX_CUSTOM_SITES){alert('最多可创建 '+MAX_CUSTOM_SITES+' 个自定义网站。');return}const cfg=getEffectiveConfig();if(cfg.sites.some(s=>s.catRef===mgrSelectedRef&&normalize(s.u)===normalize(u))){alert('当前分类中已经存在相同链接。');return}if(commitUser(x=>x.nav.customSites.push({id:uid().replace(/[^a-zA-Z0-9_-]/g,''),catRef:mgrSelectedRef,n,u}),{nav:true,manager:true})){$('#newSiteName').value='';$('#newSiteUrl').value=''}});
+$('#restoreDefaultsBtn').addEventListener('click',()=>{if(!confirm('恢复当前浏览器中所有被隐藏的默认分类和默认网站？'))return;commitUser(u=>{u.nav.hiddenDefaultCats=[];u.nav.hiddenDefaultSites=[]},{nav:true,manager:true})});mgrSiteSearch.addEventListener('input',renderManager);$('#mgrModeSwitch').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)setNavMode(b.dataset.mode)});mgrClose.addEventListener('click',closeNavManager);mgrO.addEventListener('click',e=>{if(e.target===mgrO)closeNavManager()});
+
+/* ═══════ BACKUP ═══════ */
+const backupO=$('#backupOverlay'),backupM=$('#backupModal'),backupTrig=$('#backupTrig'),backupStatus=$('#backupStatus');let backupLastFocus=null;
+function isBackupOpen(){return backupM.classList.contains('open')}
+function openBackup(){closeSP();closeNavManager();backupLastFocus=document.activeElement;backupO.removeAttribute('inert');backupO.setAttribute('aria-hidden','false');backupO.classList.add('open');backupM.classList.add('open');backupTrig.setAttribute('aria-expanded','true');document.body.classList.add('dialog-open');backupStatus.textContent='';updateBackupStats();setTimeout(()=>$('#backupClose').focus(),60)}
+function closeBackup(){if(!isBackupOpen())return;backupO.classList.remove('open');backupM.classList.remove('open');backupO.setAttribute('aria-hidden','true');backupO.setAttribute('inert','');backupTrig.setAttribute('aria-expanded','false');document.body.classList.remove('dialog-open');const f=backupLastFocus;backupLastFocus=null;if(f&&f.isConnected)f.focus()}
+function updateBackupStats(){$('#backupCatStat').textContent=U.nav.customCats.length;$('#backupSiteStat').textContent=U.nav.customSites.length;$('#backupHeroStat').textContent={default:'默认',url:'链接',local:'本地',off:'隐藏'}[U.hero.source]||'默认'}
+function exportBackup(){const payload={type:BACKUP_TYPE,formatVersion:1,appVersion:APP_VERSION,exportedAt:new Date().toISOString(),data:{user:U,preferences:{theme:P.theme,accent:P.accent,eng:P.eng}}};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a'),d=new Date(),ymd=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');a.href=url;a.download='CATCAT-NAV-backup-'+ymd+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);backupStatus.textContent='备份已导出。'}
+async function importBackupFile(file){if(!file)return;if(file.size>2.6*1024*1024){backupStatus.textContent='导入失败：备份文件过大。';return}let payload;try{payload=JSON.parse(await file.text())}catch{backupStatus.textContent='导入失败：不是有效的 JSON 文件。';return}if(payload?.type!==BACKUP_TYPE||!payload.data?.user){backupStatus.textContent='导入失败：文件不是 CATCAT NAV 备份。';return}const nextU=sanitizeUserState(payload.data.user),pref=payload.data.preferences||{},oldU=clone(U),oldP={...P};try{localStorage.setItem(USER_KEY,JSON.stringify(nextU));U=nextU;if(['auto','dark','light'].includes(pref.theme))P.theme=pref.theme;if(['gold','blue','green','rose','violet','teal','orange','sky'].includes(pref.accent))P.accent=pref.accent;if(Number.isInteger(pref.eng)&&pref.eng>=0&&pref.eng<ENGS.length)P.eng=pref.eng;ls.s('theme',P.theme);ls.s('accent',P.accent);ls.s('eng',P.eng)}catch{U=oldU;Object.assign(P,oldP);try{localStorage.setItem(USER_KEY,JSON.stringify(oldU))}catch{}backupStatus.textContent='导入失败：浏览器存储空间不足。';return}document.documentElement.dataset.theme=resolveTheme(P.theme);document.documentElement.dataset.accent=P.accent;updateThemeColor();syncThemeButtons();syncAccentButtons();setEng(P.eng);syncNavModeButtons();syncHeroSettings();applyHeroMedia();renderNavigation();renderManager();updateBackupStats();backupStatus.textContent='导入成功，当前页面已应用备份数据。'}
+backupTrig.addEventListener('click',openBackup);$('#backupClose').addEventListener('click',closeBackup);backupO.addEventListener('click',e=>{if(e.target===backupO)closeBackup()});$('#exportBtn').addEventListener('click',exportBackup);$('#importBtn').addEventListener('click',()=>$('#importFile').click());$('#importFile').addEventListener('change',()=>{const f=$('#importFile').files?.[0];$('#importFile').value='';importBackupFile(f)});
+
+/* ═══════ CLOCK ═══════ */
+$('#footerYear').textContent=new Date().getFullYear();let _clockLastMin=-1;function tick(){const d=new Date(),curMin=d.getHours()*60+d.getMinutes();if(curMin===_clockLastMin)return;_clockLastMin=curMin;const wk='日一二三四五六',Y=d.getFullYear(),M=String(d.getMonth()+1).padStart(2,'0'),D=String(d.getDate()).padStart(2,'0'),h=String(d.getHours()).padStart(2,'0'),m=String(d.getMinutes()).padStart(2,'0');$('#heroTime').textContent=Y+'.'+M+'.'+D+'  星期'+wk[d.getDay()]+'  '+h+':'+m;const hr=d.getHours();let g='欢迎回来';if(hr<6)g='夜深了，早点休息';else if(hr<9)g='早上好';else if(hr<12)g='上午好';else if(hr<14)g='中午好';else if(hr<18)g='下午好';else if(hr<22)g='晚上好';else g='夜深了，早点休息';$('#heroTitle').innerHTML=g+'，这里是<em>喵喵起始页</em>'}tick();let clockTimer=setInterval(tick,15000);document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInterval(clockTimer);clockTimer=null}else if(!clockTimer){tick();clockTimer=setInterval(tick,15000)}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&U.hero.source==='default'&&heroMedia.hidden&&_heroRetryTimer===null)applyHeroMedia({forceDefault:true})});
+
+/* ═══════ VERSION / SETTINGS ═══════ */
+const verO=$('#versionOverlay'),verM=$('#versionModal'),verTrig=$('#versionTrig'),verClose=$('#versionClose');let verLastFocus=null;function isVersionOpen(){return verM.classList.contains('open')}function openVersion(){closeSP();closeNavManager();closeBackup();verLastFocus=document.activeElement;verO.removeAttribute('inert');verO.setAttribute('aria-hidden','false');verO.classList.add('open');verM.classList.add('open');verTrig.setAttribute('aria-expanded','true');document.body.classList.add('dialog-open');setTimeout(()=>verClose.focus(),60)}function closeVersion(){if(!isVersionOpen())return;verO.classList.remove('open');verM.classList.remove('open');verTrig.setAttribute('aria-expanded','false');verO.setAttribute('aria-hidden','true');verO.setAttribute('inert','');document.body.classList.remove('dialog-open');const f=verLastFocus;verLastFocus=null;if(f&&f.isConnected)f.focus()}verTrig.addEventListener('click',openVersion);verClose.addEventListener('click',closeVersion);verO.addEventListener('click',e=>{if(e.target===verO)closeVersion()});
+const spO=$('#spOv'),spP=$('#spPn'),spTrig=$('#sTrig');let lastFocus=null;function isSettingsOpen(){return spP.classList.contains('open')}function openSP(){if(isSettingsOpen())return;closeNavManager();closeBackup();lastFocus=document.activeElement;spO.removeAttribute('inert');spO.setAttribute('aria-hidden','false');spO.classList.add('open');spP.classList.add('open');spTrig.setAttribute('aria-expanded','true');document.body.classList.add('dialog-open');setTimeout(()=>$('#spX').focus(),80)}function closeSP(){if(!isSettingsOpen())return;spO.classList.remove('open');spP.classList.remove('open');spTrig.setAttribute('aria-expanded','false');spO.setAttribute('aria-hidden','true');spO.setAttribute('inert','');document.body.classList.remove('dialog-open');const f=lastFocus;lastFocus=null;if(f&&f.isConnected)f.focus()}spTrig.addEventListener('click',openSP);$('#spX').addEventListener('click',closeSP);spO.addEventListener('click',e=>{if(e.target===spO)closeSP()});
+function syncThemeButtons(){$$('#thTog .sp-opt').forEach(b=>{const on=b.dataset.v===P.theme;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')})}$('#thTog').addEventListener('click',e=>{const b=e.target.closest('.sp-opt');if(!b)return;P.theme=b.dataset.v;ls.s('theme',P.theme);document.documentElement.dataset.theme=resolveTheme(P.theme);updateThemeColor();syncThemeButtons();updateBackupStats()});syncThemeButtons();
+function syncAccentButtons(){$$('.swatch').forEach(b=>{const on=b.dataset.c===P.accent;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')})}$('#swWrap').addEventListener('click',e=>{const b=e.target.closest('.swatch');if(!b)return;P.accent=b.dataset.c;document.documentElement.dataset.accent=P.accent;ls.s('accent',P.accent);syncAccentButtons();updateBackupStats()});syncAccentButtons();
+$('#navModeTog').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)setNavMode(b.dataset.mode)});$('#openNavMgrBtn').addEventListener('click',openNavManager);$('#heroManageBtn').addEventListener('click',openNavManager);
+
+function trapFocus(container,e){if(e.key!=='Tab')return;const f=container.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');if(!f.length)return;const first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+[verM,spP,mgrM,backupM].forEach(el=>el.addEventListener('keydown',e=>trapFocus(el,e)));
+document.addEventListener('keydown',e=>{const tag=document.activeElement?.tagName||'',isInput=tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||document.activeElement?.isContentEditable,anyModal=isSettingsOpen()||isVersionOpen()||isNavManagerOpen()||isBackupOpen();if(e.key==='/'&&!isInput&&!anyModal){e.preventDefault();sInput.focus()}if((e.key==='s'||e.key==='S')&&!isInput&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!isVersionOpen()&&!isNavManagerOpen()&&!isBackupOpen()){e.preventDefault();isSettingsOpen()?closeSP():openSP()}if(e.key==='Escape'){if(isBackupOpen())return closeBackup();if(isNavManagerOpen())return closeNavManager();if(isVersionOpen())return closeVersion();if(isSettingsOpen())return closeSP();if(document.activeElement===sInput){sInput.value='';doFilter();sInput.blur()}}});
+
+/* ═══════ LEGACY CACHE CLEANUP ═══════ */
+async function cleanupLegacyHeroCache(){
+  if(!('serviceWorker' in navigator))return;
+  try{
+    const isLegacy=u=>/\/catcat-nav-sw\.js(?:$|[?#])/.test(String(u||''));
+    const controllerLegacy=isLegacy(navigator.serviceWorker.controller?.scriptURL);
+    const regs=await navigator.serviceWorker.getRegistrations();
+    await Promise.all(regs.filter(reg=>[reg.active,reg.waiting,reg.installing].some(w=>isLegacy(w?.scriptURL))).map(reg=>reg.unregister()));
+    if('caches' in window){const names=await caches.keys();await Promise.all(names.filter(name=>name.startsWith('catcat-nav-hero-')).map(name=>caches.delete(name)))}
+    if(controllerLegacy&&sessionStorage.getItem('sg_legacy_sw_cleaned')!=='1'){
+      sessionStorage.setItem('sg_legacy_sw_cleaned','1');
+      location.reload();
+      return new Promise(()=>{});
+    }
+    sessionStorage.removeItem('sg_legacy_sw_cleaned');
+  }catch{}
+}
+
+/* ═══════ INIT ═══════ */
+(async()=>{await cleanupLegacyHeroCache();try{localStorage.removeItem('sg_hero_default_retry_v1')}catch{}syncNavModeButtons();syncHeroSettings();applyHeroMedia();renderNavigation();updateBackupStats();requestAnimationFrame(updateTabEdge)})();
+})();
+</script>
+</body>
+</html>
